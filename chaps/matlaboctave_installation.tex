@@ -1,0 +1,156 @@
+% Programmering i matematiken - med Matlab & Octave (c) by Krister Trangius & Emil Hall
+%
+% Programmering i matematiken - med Matlab & Octave is licensed under a
+% Creative Commons Attribution-ShareAlike 4.0 International License.
+%
+% You should have received a copy of the license along with this
+% work. If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
+% ----------------------------------------------------------------------------------------
+\chapter{Matlab och Octave}\label{ch:installation}
+I det här kapitlet ska vi översiktligt gå igenom verktygen Matlab och Octave och hur man använder dem. Vilket av dessa verktyg du använder dig av ska inte spela någon roll i den här boken, då samtliga kodexempel är skrivna och testade med båda.
+\newpage
+%------------MATLAB---------------
+\section{Matlab: introduktion}
+För att använda Matlab krävs det en licens som kostar pengar. Om du ska använda Matlab, så har förhoppningsvis din skola en licens eller så har du köpt en själv. Om du inte har det, så kan vi rekommendera Octave istället som inte kostar pengar (se \autoref{sec:octave_intro}). Matlab funkar i Microsoft Windows, Mac OS X och Linux.
+
+\subsection{Matlab: kommandofönstret}
+När du först startar Matlab så ser det ut ungefär såhär:
+
+\figurec{15cm}{matlab-gui-layout-1.png}{Start-utseendet på Matlab}
+
+Som du ser finns det ett antal olika rutor. Den som kommer vara mest intressant för oss i början av boken är rutan ''Command window''. I den finns två högerpilar:
+
+\begin{matlab}[caption={Tom kommando-rad},label={}]
+>>
+\end{matlab}
+
+Efter högerpilarna finns din blinkande markör, så du kan skriva text där. Testa att skriva in texten \cw{1+1}, så att det ser ut såhär:
+
+\begin{matlab}[caption={Skrivit in lite matte},label={}]
+>> 1+1
+\end{matlab}
+
+och tryck sedan på Enter-tangenten. Vad tror du kommer hända?
+
+\begin{matlab}[caption={Hurra, datorn kan räkna!},label={}]
+>> 1+1
+ans = 2
+>>
+\end{matlab}
+
+Ordet \cw{ans} är en förkortning av ''answer''.
+
+Notera att \cw{1+1} även hamnar i rutan nere till höger som heter ''Command history''. Det är precis som det låter en lista med alla uträkningar du skrivit in tidigare, sorterade i den ordning du skrev in dem. Prova själv att skriva in flera enkla matteberäkningar i ''Command window'' och se hur de dyker upp i ''Command history''. Om du sedan dubbelklickar på en rad i ''Command history'' så körs denna beräkning igen. Det kanske inte är så viktigt än så länge, men kommer att bli mer användbart längre fram när du vill slippa skriva in en jättelång uträkning två gånger.
+
+\subsection{Filer i Matlab}
+I början av boken kommer vi bara behöva använda ''Command window'' men i \autoref{ch:selektion} behöver vi börja arbeta med filer, för att kunna skriva längre kodstycken.
+
+För att skapa en ny fil, tryck i menyn: \emph{File -> New -> Blank M-File}.
+
+Nu har du en tom fil där du kan skriva in samma typ av kommandon som vi tidigare har skrivit in i ''Command window''. Skillnaden är att här körs inte koden direkt efter att du skrivit en rad och tryckt Enter, utan du kan skriva en massa rader och sen köra alltihop på en gång. Bara för att testa detta, skriv in:
+
+\begin{matlab}[caption={Skrivit in lite matte},label={}]
+1+1
+\end{matlab}
+
+Hitta sedan rätt knapp överst i Editor-rutan. Antingen en grafisk knapp med en grön \emph{Play}-symbol som pekar åt höger, eller i menyn \emph{Debug -> Save file and run}, eller genom att trycka på \emph{F5}-tangenten.
+
+\newpage
+%------------OCTAVE---------------
+
+\section{GNU Octave: introduktion}\label{sec:octave_intro}
+Om din du eller din skola inte har en licens för Matlab så kan du använda en gratis opensource-klon som heter GNU Octave och funkar ungefär likadant. Octave funkar i Microsoft Windows, Mac OS X, Linux, BSD och en del andra system.
+
+För att kunna programmera i Octave så måste det först finnas nerladdat och installerat på din dator.
+
+\boxlinks{
+Octave finns att ladda ner på: \url{https://www.gnu.org/software/octave/}
+}
+
+\subsection{GNU Octave: kommandofönstret}
+När du först startar Octave så ser det ut ungefär såhär:
+
+\figurec{15cm}{gnu-octave-gui-layout-1.png}{Start-utseendet på GNU Octave}
+
+Som du ser finns det ett antal olika rutor. Det som kommer vara mest intressant för oss i början av boken är rutan ''Command window''. I ''Command window'' finns två högerpilar.
+
+\begin{matlab}[caption={Tom kommando-rad},label={}]
+>>
+\end{matlab}
+
+Efter högerpilarna finns din blinkande markör, så du kan skriva text där. Skriv in texten \cw{1+1}, så att det ser ut såhär:
+
+\begin{matlab}[caption={Skrivit in lite matte},label={}]
+>> 1+1
+\end{matlab}
+
+och tryck sedan på Enter-tangenten. Vad tror du kommer hända?
+
+\begin{matlab}[caption={Hurra, datorn kan räkna!},label={}]
+>> 1+1
+ans = 2
+\end{matlab}
+
+\cw{ans} är en förkortning av ''answer''.
+
+Notera att \cw{1+1} även hamnar i rutan nere till vänster som heter ''Command history''. Det är precis som det låter en lista med alla uträkningar du skrivit in tidigare, sorterade i den ordning du skrev in dem. Prova själv att skriva in flera enkla matteberäkningar i ''Command window'' och se hur de dyker upp i ''Command history''. Om du sedan dubbelklickar på en rad i ''Command history'' så körs denna beräkning igen. Det kanske inte är så viktigt än så länge, men kommer att bli mer användbart längre fram när du vill slippa skriva in en jättelång uträkning två gånger.
+
+\subsection{Filer i Octave}
+I början av boken kommer vi bara behöva använda ''Command window'' men i \autoref{ch:iteration} behöver vi börja arbeta med filer, för att kunna skriva längre kodstycken.
+
+Längst ner, bredvid ''Command window'' så finns fliken ''Editor'' - klicka på den! I editor-rutan klickar du sedan på File -> New Script.
+
+Nu har du en tom fil där du kan skriva in samma typ av kommandon som vi tidigare har skrivit in i ''Command window''. Skillnaden är att här körs inte koden direkt efter att du skrivit en rad och tryckt Enter, utan du kan skriva en massa rader och sen köra alltihop på en gång. Bara för att testa detta, skriv in:
+
+\begin{matlab}[caption={Skrivit in lite matte},label={}]
+1+1
+\end{matlab}
+
+Hitta sedan rätt knapp överst i Editor-rutan. Antingen en grafisk knapp med ett kugghjul och en \emph{Play}-symbol som pekar åt höger, eller i menyn \emph{Run -> Save file and run}, eller genom att trycka på \emph{F5}-tangenten.
+
+\figurec{15cm}{gnu-octave-gui-run-file.png}{Knapp för att köra en fil med kod}
+\newpage
+%------------OCTAVE ONLINE---------------
+
+\section{Octave Online: introduktion}
+Om du inte vill/kan ladda ner och installera program så kan du använda en gratisversion i webbläsaren istället.
+
+\boxlinks{
+Octave Online finns på: \url{https://octave-online.net/}
+}
+
+När du först går in på Octave Online så ser det ut ungefär såhär:
+
+\figurec{15cm}{octave-online-gui-layout-1.png}{Start-utseendet på Octave Online}
+
+Som du ser finns det ett antal olika rutor. De som kommer vara mest intressant för oss i början av boken är de vita rutorna. I det smala vita fältet längst ner (som kallas ''Command Prompt'') finns två högerpilar. Klicka i det fältet!
+
+Efter högerpilarna finns din blinkande markör, så du kan skriva text där. Skriv in texten \cw{1+1} och tryck sedan på Enter-tangenten. Vad tror du kommer hända?
+
+\begin{matlab}[caption={Hurra, datorn kan räkna!},label={}]
+ans = 2
+\end{matlab}
+
+\cw{ans} är en förkortning av ''answer''.
+\newpage
+
+\subsection{Filer i Octave Online}
+I början av boken kommer vi bara behöva använda ''Command window'' men i \autoref{ch:iteration} behöver vi börja arbeta med filer, för att kunna skriva längre kodstycken.
+
+För att kunna skapa filer i Octave Online så behöver du ett konto. Det går att skapa ett nytt konto på sidan. Det är också möjligt att logga in med sitt Google-konto.
+
+För att skapa en ny fil, tryck på ''create empty file'' (en ikon) uppe till vänster:
+
+\figurec{8cm}{octave-online-gui-new-file.png}{Knapp för att skapa en ny fil}
+
+Välj vad filen ska heta. När du har klickat på OK dyker filen upp i listan till vänster. Klicka på den nya filen.
+
+Nu har du en tom fil där du kan skriva in samma typ av kommandon som vi tidigare har skrivit in i ''Command Prompt''. Skillnaden är att här körs inte koden direkt efter att du skrivit en rad och tryckt Enter, utan du kan skriva en massa rader och sen köra alltihop på en gång. Bara för att testa detta, skriv in:
+
+\begin{matlab}[caption={Skrivit in lite matte},label={}]
+1+1
+\end{matlab}
+
+För att kunna köra ditt program, tryck först på spara-knappen, därefter på \emph{run}.
+
+\figurec{13cm}{octave-online-save-run-buttons.png}{Spara filen och kör}

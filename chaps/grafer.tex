@@ -1,0 +1,149 @@
+% Programmering i matematiken - med Matlab & Octave (c) by Krister Trangius & Emil Hall
+%
+% Programmering i matematiken - med Matlab & Octave is licensed under a
+% Creative Commons Attribution-ShareAlike 4.0 International License.
+%
+% You should have received a copy of the license along with this
+% work. If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
+% ----------------------------------------------------------------------------------------
+\chapter{Grafer och diagram}\label{ch:grafer}\index{grafer|textbf}\index{diagram|textbf}
+En stor anledning till att vi programmerar i Matlab/Octave är att det där är väldigt lätt att rita olika sorters grafer och diagram. I det här kapitlet kommer vi gå igenom en funktion som heter \cw{plot} - den använder vi för att rita grafer. Vi kommer också lära oss funktionen \cw{hist} som används för att rita ut histogram.
+
+%==============================================================================
+
+\section{Plot}\index{plot|textbf}
+
+Tänk dig att vi med en termometer har mätt temperaturen en gång per dag, fr.o.m. måndag t.o.m. fredag, så att vi har 5 mätvärden. Om vi har våra mätvärden i en lista så kan vi ge listan till Matlab/Octave med kommandot \cw{plot} och då kommer vi få upp en graf på skärmen:
+
+\begin{matlab}[caption={Vår första graf},label={}]
+temperaturPerDag = [1 4 0 2 3];
+plot(temperaturPerDag);
+\end{matlab}
+
+Du ser resultatet här nedanför. Notera att linjen börjar på 1 längst till vänster, sen går den upp till 4, ner till 0, och så vidare, precis i samma ordning som vår lista. Notera också att den horisontella axeln går från 1 till 5, vilket motsvarar antalet element i vår lista. Den vertikala axeln går från 0 till 4, vilket beror på att den lägsta temperaturen i vår lista är 0 och den högsta är 4.
+\newpage
+\figurec{9cm}{gnu-octave-first-plot-example.png}{Vår första graf}
+
+\subsection{Rita punkter}
+
+För att göra grafen lite tydligare så kan vi be Matlab/Octave att rita små cirklar vid varje mätpunkt. Det gör vi genom att lägga till \cw{, '-o'} innan slutparentesen efter \cw{plot}:
+
+\begin{matlab}[caption={Vår andra graf},label={}]
+temperaturPerDag = [1 4 0 2 3];
+plot(temperaturPerDag, '-o');
+\end{matlab}
+
+\boxlinks{
+Det finns många fler möjligheter att ställa in och anpassa hur grafen ser ut. T.ex. färger, storlek, var de vertikala och horisontella axlarna ska börja och sluta, med mera. Du kan läsa mer om inställningsmöjligheterna på \url{https://se.mathworks.com/help/matlab/ref/plot.html} och \url{https://se.mathworks.com/help/matlab/creating_plots/change-axis-limits-of-graph.html}
+}
+
+\subsection{Flera grafer på samma gång}\index{hold|textbf}
+
+Vad händer om vi använder \cw{plot} flera gånger på rad, fast med olika listor? Jo, varje \cw{plot} rensar skärmen från allt som syntes där tidigare, så vi ser bara resultatet av den sista \cw{plot}:en. Men om vi skriver \cw{hold on;} överst i vårt program så går det att se flera resultat i samma graf. Varje \cw{plot}-linje får då en egen färg, för att vi lättare ska kunna se skillnad på dem:
+\newpage
+\begin{matlab}[caption={Två grafer i en},label={}]
+hold on;
+plot([1 4 0 2 3], '-o');
+plot([4 5 4 3 2], '-o');
+\end{matlab}
+
+\figurec{9cm}{gnu-octave-2-plots-in-1.png}{Två grafer i en}
+
+\subsection{Plotta med två listor, i två dimensioner}\label{subsec:plottwodim}
+
+Tänk om vi hade tänkt mäta temperaturen varje dag i en vecka, men vi glömde mäta på torsdag och fredag. Hur vill vi att vår graf ska se ut då? Det vore bra om det syntes i grafen att två dagar saknas i mitten. Vi kan förstås plotta som vanligt...
+
+\begin{matlab}[caption={Syns inte att torsdag och fredag saknas},label={}]
+temperaturPerDag = [10 9 9 7 6];
+plot(temperaturPerDag, '-o');
+\end{matlab}
+(Se graf på nästa sida...)
+\newpage
+\figurec{9cm}{gnu-octave-missing-days-1.png}{Syns inte att torsdag och fredag saknas}
+
+... men då ser det ut som att vi mätte fem dagar på rad. Det vore bättre om vi fick ett ''glapp'' i grafen, så att det inte finns någon punkt på $x=4$ och $x=5$, men att det sedan finns punkter igen på $x=6$ och $x=7$. Kan vi åstadkomma detta i Matlab/Octave? Såklart vi kan! Men då måste vi använda plot på ett nytt sätt. Istället för att bara skicka in en lista så skickar vi in två listor:
+
+\begin{matlab}[caption={Syns att torsdag och fredag saknas},label={}]
+dagar = [1 2 3 6 7]; % vi hoppar över 4 och 5
+temperaturPerDag = [10 9 9 7 6];
+plot(dagar, temperaturPerDag, '-o');
+\end{matlab}
+
+\figurec{9cm}{gnu-octave-missing-days-2.png}{Syns att torsdag och fredag saknas}
+
+Nu fick vi det glapp som vi ville ha, hurra!
+
+Notera att vi på detta sätt kan rita vilka former som helst, även linjer som vänder tillbaka, korsar sig själv, osv:
+
+\begin{matlab}[caption={Plotta vilken form som helst},label={}]
+plot([1 5 3 2 4.5], [1 2 4 3 3], '-o');
+\end{matlab}
+
+\figurec{9cm}{gnu-octave-2d-plot.png}{Kors och tvärs}
+
+Om vi enkelt vill rita en rät linje, så kan vi använda ovanstående metod och bara ange linjens startpunkt och slutpunkt, såhär:  \cw{plot([xstart xend], [ystart yend])}. Exempel:
+\begin{matlab}[caption={Rät linje},label={}]
+plot([0 10], [7 5]);
+\end{matlab}
+
+\subsection{Plotta en funktion av x}
+Nu har vi lärt oss allt vi behöver för att kunna rita en graf av en funktion av x. Som vi såg i \autoref{sec:operationerpaenlista} så är det möjligt att köra en funktion på varje element i en lista. Låt oss testa att rita ut en graf av funktionen \cw{sind} några varv: 
+
+\begin{matlab}[caption={Plotta en sinusvåg},label={}]
+x = [0 : 10 : 1080]; % fyll lista med x-värden att visa
+y = sind(x); % kör funktionen sind på varje element
+plot(x, y); % rita ut grafen!
+\end{matlab}
+
+Notera att vi också använder det vi lärde oss i \autoref{subsec:filllist} där vi fyllde en lista med alla nummer mellan -2 och 2.
+
+\subsection{Övningar för plot}
+
+\begin{matteovning}{Återskapa kod efter bild}{aterskapaKodEfterBild}
+Skriv koden för att rita följande bild:
+
+\figurec{9cm}{exercise-graph-1.png}{}
+\end{matteovning}
+\newpage
+\begin{matteovning}{Plotta given funktion}{plottaGivenFunktion}
+Här är några ofullständiga rader kod:
+\vspace{10pt}
+\begin{matlab}
+x = % här ska det stå något
+y = sin(x) ./ x;
+% här ska det stå kod för att rita ut grafen
+\end{matlab}
+Ersätt kommentarerna med kod för att rita följande bild:
+
+\figurec{9cm}{exercise-graph-2.png}{}
+\end{matteovning}
+
+%==============================================================================
+
+\section{Histogram}\index{histogram|textbf}
+
+Om vi istället har temperaturen från många dagar så kanske vi hellre vill se en slags sammanfattning - hur många dagar var det 3 grader varmt? Hur många dagar var det 4 grader? Då passar det bra med ett så kallat histogram, även känt som stapeldiagram eller stolpdiagram.
+
+\begin{matlab}[caption={Vårt första histogram},label={}]
+temperaturPerDag = [1 4 0 2 3 4 3 6 7 8 9 8 7 7 6 5 7 3 2 3 2 2 1 1 2 1 0];
+hist(temperaturPerDag, 0:9);
+\end{matlab}
+(Se histogram på nästa sida...)
+\newpage
+\figurec{9cm}{gnu-octave-first-histogram-example.png}{Vårt första histogram}
+
+I histogrammet kan vi lätt se att det var 3 grader varmt fyra dagar och 4 grader varmt i två dagar. Funktionen \cw{hist} tar alltså två argument. Det första är en lista av tal att sammanfatta, som kan vara hur lång som helst. Det andra argumentet berättar hur vi vill sammanfatta listan, närmare bestämt vilka staplar vi vill ha. \cw{0:9} betyder att den första stapeln ska vara 0 och den sista stapeln ska vara 9. Prova vad som händer om du ändrar till t.ex. \cw{0:5} eller \cw{-5:15}! (Ser du likheten med \autoref{subsec:filllist} där vi fyllde en vektor med alla nummer mellan -2 och 2?)
+
+När vi vill visa en sån här lista, där vi vet att den lägsta temperaturen är 0 och den högsta är 9, så passar det förstås bäst att ha just de staplarna i diagrammet. Mer generellt, när vi har en lista som bara innehåller heltal (inga decimaltal), och har ett ganska litet antal olika heltal, så passar det bäst att ha en stapel för varje heltal. Vi kan automatisera det såhär:
+
+\begin{matlab}[caption={Välja rätt antal staplar automatiskt},label={}]
+temperaturPerDag = [1 4 0 2 3 4 3 6 7 8 9 8 7 7 6 5 7 3 2 3 2 2 1 1 2 1 0];
+hist(temperaturPerDag, min(temperaturPerDag):max(temperaturPerDag));
+\end{matlab}
+
+Med ovanstående kod kan vi lätt lägga till nya temperaturer utan att behöva komma ihåg att ändra på \cw{hist}-raden.
+
+Men om vi istället har en lista som innehåller väldigt många olika heltal, eller decimaltal, så passar det inte bäst med något särskilt antal staplar utan är mer av en smaksak.
+
+%==============================================================================
+

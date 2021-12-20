@@ -1,0 +1,319 @@
+% Programmering i matematiken - med Matlab & Octave (c) by Krister Trangius & Emil Hall
+%
+% Programmering i matematiken - med Matlab & Octave is licensed under a
+% Creative Commons Attribution-ShareAlike 4.0 International License.
+%
+% You should have received a copy of the license along with this
+% work. If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
+% ----------------------------------------------------------------------------------------
+\chapter{Listor}\label{ch:listor}\index{listor|textbf}\index{array|textbf}\index{vektor|textbf}I det här kapitlet ska vi gå igenom listor och se hur de funkar i programmering. Man kan se listor som en speciell typ av variabler (som vi lärde oss i föregående kapitel). En lista kan, till skillnad från en vanlig variabel, innehålla flera värden som ligger på rad. Listor är användbara då man vill hålla reda på många saker samtidigt.
+
+\boxteknisk{
+Den formella beteckningen för en lista är \emph{array} eller \emph{vektor}. Termen vektor kan vara lite förvirrande, då den används på olika sätt i olika sammanhang. Ibland syftar man på en riktning eller position i en rymd (då har den x-, y- och kanske z-koordinater). Termen array används bara på engelska men inte på svenska. I denna bok kommer vi att använda termen lista.
+}
+
+Ett konkret exempel på en lista kan vara temperaturer olika dagar. Den första dagen var det 15 grader, den andra 13, den tredje 16 osv. Varje temperatur ligger var för sig lagrad i något som kallas \emph{element}\index{element|textbf}. Vi kan komma åt varje element i en lista med något som kallas för \emph{index}\index{index|textbf}.
+
+Här är en illustration av en lista som innehåller fem olika element. Vi kan se varje elements index:
+
+\begin{figure}[H]
+\begin{center}
+\caption{En lista}
+\begin{tabular}{l|*{5}{c}r}
+\emph{index} & \emph{1} & \emph{2} & \emph{3} & \emph{4} & \emph{5} \\
+\hline
+\emph{}       & 17 & -65 & -20 & 9 & 42  \\
+\end{tabular}
+\end{center}
+\end{figure}
+
+Om vi ska skapa denna lista i Matlab/Octave kan vi skriva så här:
+
+\begin{matlab}[caption={Skapa lista},label={ex:skapavektor1}]
+% Skapa listan:
+temperature = [];
+
+% Tilldela listans element olika värde genom index:
+temperature(1) = 17;
+temperature(2) = -65;
+temperature(3) = -20;
+temperature(4) = 9;
+temperature(5) = 42;
+\end{matlab}
+
+För att sedan använda den kan vi t.ex. göra så här:
+
+\begin{matlab}[caption={Använda lista},label={ex:lasavektor1}]
+% Lägg samman värdet på de olika elementen i listan och
+% skriv ut medelvärdet:
+summa = temperature(1) + temperature(2) + temperature(3) + temperature(4) + temperature (5);
+disp(summa / 5);
+\end{matlab}
+
+Då får vi följande utskrift:
+
+\vspace{10pt}
+\begin{matlab}
+-3.400
+\end{matlab}
+
+\section{Indexering av listor}\index{indexering (av listor)|textbf}
+
+I \autoref{ex:skapavektor1} tilldelar vi listan fem olika heltal med hjälp av deras index. Genom en siffra indexeras ett specifikt element i listan. Index är det som står inne i parentesen efter variabelnamnet. Observera att indexeringen börjar på 1. Vi kan använda index både för att skriva och läsa ett specifikt element.
+
+När man arbetar med listor och indexering av dem gäller det dock att se upp! Det är lätt hänt att man försöker att läsa ett element som inte finns. Det kommer bli fel då man kör programmet. Här är ett exempel:
+
+\begin{matlab}[caption={Felaktig indexering av en lista},label={}]
+temperature = [];
+
+temperature(1) = 17;
+temperature(2) = -65;
+temperature(3) = -20;
+temperature(4) = 9;
+temperature(5) = 42;
+
+% Skriv ut elementen med index 1 och 6
+disp('First element: ');
+disp(temperature(1));
+disp('Sixth element: ');
+disp(temperature(6)); % fel!
+\end{matlab}
+
+Då får vi följande utskrift:
+
+\vspace{10pt}
+\begin{matlab}
+First element:
+ 17
+Sixth element:
+error: temperature(6): out of bound 5
+\end{matlab}
+
+Först skrivs värdet på det första elementet, \cw{temperature(1)} ut. Därefter får vi som väntat ett felmeddelande. Felet är \emph{''temperature(6): out of bound 5''}. Vi försöker helt enkelt indexera ett element som ligger utanför vår lista.
+
+Det går alltså inte att läsa ett index som inte finns, men däremot går det jättebra att skriva till ett index som inte finns. Då kommer det helt enkelt att skapas. Och om vi skriver till ett index som redan finns så kommer det gamla värdet att ersättas, precis som det funkar för vanliga variabler.
+
+\section{Listans längd}\index{size|textbf}
+
+En lista har ett antal element. Antalet kallas även listans längd. När vi skriver till ett element med ett nytt index så växer listan - den blir längre. Vi kan mäta listans längd med hjälp av funktionen \cw{size}. Den används såhär:
+
+\begin{matlab}[caption={Listans längd},label={}]
+temperature = [];
+
+% Stoppa in tre element i listan,
+% och skriv ut listans längd efter varje steg:
+temperature(1) = 17;
+disp(size(temperature, 2));
+temperature(2) = -65;
+disp(size(temperature, 2));
+temperature(3) = -20;
+disp(size(temperature, 2));
+\end{matlab}
+
+Vi får resultatet:
+
+\vspace{10pt}
+\begin{matlab}
+ 1
+ 2
+ 3
+\end{matlab}
+
+\boxteknisk{
+Du kanske undrar varför det står \cw{size(temperature, 2)} och inte bara
+\newline
+\cw{size(temperature)}, det hade ju känts enklare. Anledningen har med matriser att göra men är mer avancerad än vad vi tar upp i denna bok.
+}
+
+Vad händer om vi inte lägger till element i direkt nummerordning? Då skapas nya element upp till och med det index som vi anger. Alla tidigare element får värdet noll:
+
+\begin{matlab}[caption={Listan fylls automatiskt på med tomma element},label={}]
+temperature = [];
+temperature(3) = -20;
+disp(temperature);
+\end{matlab}
+
+Vi får resultatet:
+
+\vspace{10pt}
+\begin{matlab}
+	0    0  -20
+\end{matlab}
+
+\section{Listans sista element}\index{end|textbf}
+
+Vår listas första element är alltid \cw{temperature(1)}, men vad är dess sista element? Det sista elementets index varierar ju. Vi kan alltid komma åt det sista elementet genom att mäta längden, såhär:
+\vspace{10pt}
+\begin{matlab}
+temperature(size(temperature, 2))
+\end{matlab}
+Men eftersom det är långt och tjatigt att skriva så finns det ett kortare sätt:
+\vspace{10pt}
+\begin{matlab}
+temperature(end)
+\end{matlab}
+Och om vi vill lägga till nya element i slutet av listan, så att den växer, så kan vi skriva såhär:
+\vspace{10pt}
+\begin{matlab}
+temperature(end+1) = 13;
+temperature(end+1) = 20;
+% nu har vi lagt till två nya element
+\end{matlab}
+\newpage
+\section{Förenklat sätt att skapa listor}\index{zeros|textbf}\index{ones|textbf}
+Det finns också ett enklare sätt att skapa listor på:
+
+\begin{matlab}[caption={Förenklat sätt att skapa listor},label={}]
+temperature = [17 -65 -20 9 42];
+\end{matlab}
+
+Eller om vi vill skapa en lista med ett visst antal element, och alla element ska ha samma värde:
+
+\begin{matlab}[caption={Massproduktion},label={}]
+temperature = zeros(1, 4); % samma som [0 0 0 0]
+temperature = ones(1, 4); % samma som [1 1 1 1]
+\end{matlab}
+
+Detta kan vara praktiskt om man vill skapa väldigt många element och slippa skriva in dem ett i taget. Också praktiskt om det önskade antalet element ligger i en variabel.
+
+\boxteknisk{
+Du kanske undrar varför det står \cw{zeros(1, 5)} och inte bara \cw{zeros(5)}, det hade ju känts enklare. Anledningen har åter igen med matriser att göra men är mer avancerad än vad vi tar upp i denna bok.
+}
+
+% \section{Att ta bort element ur en lista}
+
+% Man kan ta bort element ur en lista, inte bara lägga till dem. Koden för att ta bort ett element är lite märklig, för den liknar koden för att skapa en ny lista, men det är bara att gilla läget. Här är ett exempel där vi tar bort element med index 3 ur listan:
+
+% \begin{matlab}[caption={Ta bort element ur en lista},label={}]
+% temperature = [111 222 333 444 555 666 777];
+
+% % Ta bort det tredje elementet ur listan
+% temperature(3) = [];
+
+% % Skriv ut så vi ser skillnaden
+% disp(temperature);
+% disp(size(temperature, 2));
+% \end{matlab}
+
+% Vi får resultatet:
+
+% \begin{matlab}
+% 	111 222 444 555 666 777
+% 	6
+% \end{matlab}
+
+% Notera att när vi tar bort ett element så krymper listans längd, och efterföljande element ''flyttas ner ett snäpp''. Det element som tidigare låg på index 4 kommer att flyttas ner till index 3, och det som tidigare låg på index 5 kommer att flyttas ner till index 4, och så vidare.
+
+
+\section{Fylla en lista med nummer i ordning}\label{subsec:filllist}
+
+Ofta kommer vi vilja fylla en lista med tal på rad, t.ex. \cw{[-2 -1 0 1 2]}. Då finns det ett koncisare sätt att skriva. Vi kan skriva det lägsta talet, sedan ett kolon \cw{:} och sedan det högsta talet:
+\begin{matlab}[caption={Skapa en lista som innehåller alla heltal från -2 till 2},label={}]
+x = [-2 : 2];
+\end{matlab}
+
+Med hjälp av ett till kolon så kan vi dessutom ta kortare ''steg'' mellan elementen:
+
+\begin{matlab}[caption={Anpassa steglängd mellan element},label={}]
+x = [-2 : 0.5 : 2]
+\end{matlab}
+
+Vi får resultatet:
+
+\vspace{10pt}
+\begin{matlab}
+  -2.00000  -1.50000  -1.00000  -0.50000   0.00000   0.50000   1.00000   1.50000   2.00000
+\end{matlab}
+
+Med andra ord är alltså regeln \cw{start:steglängd:slut}, eller bara \cw{start:slut} och då blir steglängden automatiskt 1.
+
+
+\section{Söka i en lista}\label{sec:findInList}
+
+Vi har lärt oss att läsa elementet med ett visst index. Ibland kan vi istället vilja göra samma sak ''baklänges'' och få svar på frågan: På vilket index ligger ett visst element? T.ex. vilken dag var temperaturen 9 grader? Då kan vi använda funktionen \cw{find}:
+
+\vspace{10pt}
+\begin{matlab}
+temperature = [17 -65 -20 9 42];
+find(temperature == 9) % ger resultatet 4
+\end{matlab}
+
+
+\section{Matematiska operationer på varje element i listan}\label{sec:operationerpaenlista}
+
+Vi kan enkelt göra samma matematiska operation på varje element i en lista, t.ex. multiplicera alla element med 2, eller med sig själva. Vi använder de vanliga operatorerna \cw{+ - * /} men med en punkt framför:
+
+\begin{matlab}[caption={Matematiska operationer på varje element i listan},label={}]
+x = [1 2 3 4];
+y = x .+ 1;
+z = x .* 2;
+w = x .* x;
+disp(y);
+disp(z);
+disp(w);
+\end{matlab}
+
+Vi får resultatet:
+
+\vspace{10pt}
+\begin{matlab}
+  2 3 4 5
+  2 4 6 8
+  1 4 9 16
+\end{matlab}
+
+\boxteknisk{
+Varför behöver vi skriva punkten framför multiplikationstecknet? Anledningen är mer avancerad än vad vi tar upp i denna bok, men har som vanligt med matriser att göra. Om vi glömmer punkten när vi skriver \cw{z = x .* 2} så funkar det ändå, men om vi glömmer punkten när vi skriver \cw{w = x .* x} så får vi felmeddelandet: \cw{operator *: nonconformant arguments (op1 is 1x4, op2 is 1x4)}
+}
+\newpage
+Det är också möjligt att köra funktioner på varje element i en lista.
+
+\begin{matlab}[caption={Köra funktioner på varje element i en lista},label={}]
+x = [4 9 16 25];
+disp(sqrt(x));
+\end{matlab}
+
+Vi får resultatet:
+
+\vspace{10pt}
+\begin{matlab}
+2 3 4 5
+\end{matlab}
+
+\section{Slumptal med hjälp av listor}\label{sec:listorslumptal}\index{randi|textbf}
+Om vi vill slumpa ett tal inom ett valfritt intervall, t.ex. 7 och 42, så gör vi såhär:
+
+\vspace{10pt}
+\begin{matlab}
+randi([7 42]); % ger ett slumptal fr.o.m 7 t.o.m 42
+\end{matlab}
+
+%---------------------------------------------------------------
+
+\section{Övningar för listor}
+
+\begin{matteovning}{Olika sätt att skapa samma lista}{skapaListaMed6Element}
+Skapa en lista som innehåller 8 element. Det första elementet ska ha värdet 20, det andra ska ha värdet 30, det tredje 40, och så vidare upp till och med 90. Hur många olika sätt kan du komma på för att skapa en sådan lista? Vilket tycker du känns lämpligast?
+\end{matteovning}
+
+
+\begin{matteovning}{\cw{disp} med lista}{dispMedLista}
+Tänk dig följande kod:
+\vspace{10pt}
+\begin{matlab}
+temperature = [];
+temperature(3) = -20;
+temperature(6) = -13;
+disp(temperature(1));
+disp(size(temperature, 2));
+\end{matlab}
+Utan att skriva in koden själv i Matlab/Octave, vad tror du att vi får för utskrift?
+\end{matteovning}
+
+% \begin{matteovning}{Listans längd}{listansLangd}
+% XX
+% \end{matteovning}
+
+% \begin{matteovning}{Matematiska operatorer på varje element i listan}{operatorerPaVarjeElement}
+% XX
+% \end{matteovning}

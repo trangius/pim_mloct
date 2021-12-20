@@ -1,0 +1,54 @@
+% Programmering i matematiken - med Matlab & Octave (c) by Krister Trangius & Emil Hall
+%
+% Programmering i matematiken - med Matlab & Octave is licensed under a
+% Creative Commons Attribution-ShareAlike 4.0 International License.
+%
+% You should have received a copy of the license along with this
+% work. If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
+% ----------------------------------------------------------------------------------------
+\chapter{Om programmering}\label{ch:omprog}
+I det här kapitlet kommer vi att prata lite om vad programmering är för något, samt titta lite kort på programmeringens historik.
+
+\section{Algoritmer}\label{subsec:algoritmer1}\index{algoritmer|textbf}
+Inom matematiken pratar man om något som kallas för algoritmer. Vi kommer att återkomma till termen emellanåt i denna bok. En algoritm kan enklast ses som en serie matematiska instruktioner, som sker efter varandra. Alltså som ett kakrecept men något som behandlar tal, snarare än mjöl och socker.
+
+Man har arbetat med algoritmer sedan långt innan datorerna fanns. Redan de gamla perserna och grekerna sysslade med algoritmteori – dvs konsten att skriva algoritmer. Skillnaden då mot nu, är att förr i tiden var det människan som med hjälp av sin tanke ''körde'' algoritmen. Man gick helt enkelt igenom algoritmen för hand, steg för steg. Idag kan vi istället använda datorerna till det. Med andra ord så skriver programmeraren algoritmer som datorn sedan kör.
+
+\section{Programmeringens historik}
+Datorer och programmering är något relativt nytt, åtminstone ur ett perspektiv. Ur ett annat perspektiv är det något ganska gammalt. Redan de gamla grekerna hade datorliknande maskiner som beräknade himlakroppars rörelse. Blaise Pascal uppfann en räknemaskin redan på 1600-talet och man har, som sagt, sedan länge arbetat med algoritmer i matematiken.
+
+\subsection{Charles Babagge, Ada Lovelace och den analytiska maskinen}
+Under 1800-talet, i och med den industriella revolutionen, kom vävstolarna att effektiviseras till att bli mer eller mindre automatiska maskiner. De mönster som skulle vävas bestämdes med hjälp av hålkort. Hålkort var helt enkelt papperskort med hål i på bestämda platser.
+
+\figurec{6cm}{halkort.jpg}{Hålkort till vävstol}
+
+Charles Babagge uppfann vad som kan kallas för den första datormaskinen. Den hette Den Analytiska Maskinen och var helt mekanisk (alltså inte elektrisk) men den kunde räkna ut precis vad som helst. Charles Babagge blev aldrig helt klar med maskinen men det gick ändå att programmera på den – med hjälp av hålkort.
+
+\figurec{6cm}{analytical_machine.jpg}{Den analytiska Maskinen}
+
+Ada Lovelace, en engelsk grevinna och matematiker är känd för att ha skrivit program till Babagges maskin. Hon har också fått ett programmeringsspråk uppkallat efter sig och brukar räknas som den första programmeraren (det är dock en sanning med modifikation).
+
+\subsection{Elektriska datorer}
+Kring andra världskriget började elektriska datorer att dyka upp. Dessa användes bland annat för att dekryptera hemliga meddelanden och att räkna ut missilers banor i luften. Precis som Babagges maskin använde sig dessa datorer av hålkort. Fysiska hål eller icke-hål på papper översattes till ström eller icke-ström inne i datorerna. Dessa datorer kunde vara lika stora som gymnastiksalar och ha en kapacitet jämförbar med en liten grafräknare idag.
+
+De stora datorerna var baserade på vakuumrör (vakuumrör används än idag, t.ex. i rörförstärkare för hifi-anläggningar). I början på sextiotalet, i och med att transistorn och integrerade kretsar (chip) hade uppfunnits, kunde man börja skapa betydligt mindre datorer med betydligt högre kapacitet. Utvecklingen har sedan dess ständigt gått framåt och vi får hela tiden snabbare och snabbare datorer.
+
+\figurec{6cm}{transistor.jpg}{Transistorer möjliggjorde mindre datorer}
+
+\subsection{Assembler}\index{assembler|textbf}
+En dator arbetar med ström och icke-ström. Detta lagrades förut som hål eller icke-hål. Idag lagras det t.ex. på hårddiskar med pyttesmå magneter i antingen en riktning, eller en annan. Ström och icke-ström brukar representeras som 1 eller 0. För att fullt ut förstå detta och förstå hur programmering fungerar, bör man därför också förstå sig på det binära talsystemet. Det är dock krångligt att hålla på med, och ska man skriva program av den storlek vi gör idag är det omöjligt att sitta med 1:or och 0:or.
+
+Redan på 50-talet insåg man att det började bli för jobbigt att sitta med binär kodning. Man översatte därför de binära koderna till vanlig engelska. På så sätt blev det plötsligt mycket enklare att programmera. Språket kallas för assembler och kan se ut så här:
+\\
+
+\begin{pseudo}
+ MOV AL, 33h
+ MOV AX, 4h
+\end{pseudo}
+
+Jämfört med moderna programmeringsspråk som Matlab och Octave är assembler dock fortfarande mycket krångligt. Det är sällan assembler används idag. Endast då man måste optimera (förbättra) en mycket viktig bit kod, eller skriver för en viss processorarkitektur, brukar man ta till assembler.
+
+\subsection{Matlab och Octave}
+Alla programmeringsspråk kan göra vilka matematiska beräkningar som helst, men de flesta programmeringsspråk har olika fokus. Vissa är gjorda för att skapa vanliga program och spel i, andra är till för att göra webapplikationer osv. Matlab är ett programmeringsspråk (och verktyg), där fokus ligger på mer traditionella matematiska beräkningar. Det finns många färdiga funktioner i Matlab för t.ex. rita grafer och histogram.
+
+Octave är en fri, öppen källkods-implementation av Matlab utvecklat av GNU (samma gäng som gör huvuddelen av alla verktyg till Linux). I praktiken innebär det att Octave är gratis men inte kommmer med samma support.

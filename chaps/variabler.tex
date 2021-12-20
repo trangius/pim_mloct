@@ -1,0 +1,204 @@
+% Programmering i matematiken - med Matlab & Octave (c) by Krister Trangius & Emil Hall
+%
+% Programmering i matematiken - med Matlab & Octave is licensed under a
+% Creative Commons Attribution-ShareAlike 4.0 International License.
+%
+% You should have received a copy of the license along with this
+% work. If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
+% ----------------------------------------------------------------------------------------
+\chapter{Variabler}\label{ch:variabler}\index{variabler|textbf}
+
+I det här kapitlet ska vi gå igenom variabler och hur de funkar i programmering. Vi kommer också lära oss hur man själv kan styra utskrift på ett tydligare sätt.
+
+Du känner kanske redan till begreppet variabler? Traditionellt inom matematiken talar man ofta om okända variabler som $x$ och $y$ eller $a$ och $b$. Variabler i Matlab/Octave är något liknande, men de används lite annorlunda.
+
+En variabel i programmering ses kanske enklast som en låda, med en etikett på. På etiketten står det ett namn och i lådan ligger det ett tal.
+\figurec{6cm}{boxes.png}{Variabler kan ses som lådor med etikett och innehåll}
+
+I matematikböcker är variablers namn oftast bara en bokstav långa, men i programmering brukar namnet vara ett helt ord, vilket hjälper oss att hålla reda på dem då vi har många.
+
+En annan skillnad är att variabler i programmering alltid har ett visst värde. I traditionell matematik kan man t.ex. säga att $a^x*a^y=a^{x+y}$ som en generell regel som gäller för alla värden. I Matlab/Octave så arbetar man inte med generella värden på variablerna, utan de ''innehåller'' alltid ett visst tal.
+
+%------------------------------------------------------------------------------
+
+\section{Att skapa en variabel}
+För att skapa en variabel hittar man först på ett namn till den, sen skriver man namnet, likamed-tecken, och värdet. Till exempel:
+\begin{matlab}[caption={Skapa variabeln celsius},label={}]
+>> celsius=17
+\end{matlab}
+
+Det är även okej att ha mellanslag om man tycker att det blir mer lättläst när det är mindre tätt:
+\begin{matlab}[caption={Skapa variabeln celsius},label={}]
+>> celsius = 17
+\end{matlab}
+
+Namnet kan inte innehålla åäö, mellanslag eller andra konstiga specialtecken. Om vi vill att namnet ska bestå av flera ord så kan vi som sagt inte använda mellanslag, utan istället brukar vi separera orden med hjälp av understreck; \cw{min\_egen\_variabel}.
+
+%------------------------------------------------------------------------------
+
+\section{Tilldelningsoperatorn =}\label{sec:tilldelningsoperatorn}\index{tilldelningsoperatorn =|textbf}
+Lika med-tecknet \cw{=} som vi använde ovan kallas för \emph{tilldelningsoperatorn}. I \autoref{sec:operatorer} tittade vi på jämförelseoperatorn \cw{==}. Inom programmering skiljer man på \emph{jämförelse} och \emph{tilldelning}. Tilldelningsoperatorn skrivs med bara \emph{ett} lika-med tecken och används, som vi såg ovan, när man vill ge en variabel ett värde. Det är mycket viktigt att man inte blandar ihop tilldelningsoperatorn \cw{=} och jämförelseoperatorn \cw{==}.
+
+Traditionellt inom matematiken har du kanske lärt dig att det inte spelar någon roll på vilken sida ''lika med''-tecknet olika tal står. När man programmerar i Matlab/Octave är det dock annorlunda. Variabeln, som ska få ett värde, står till vänster om tilldelningsoperatorn. Värdet som variabeln ska få, står till höger. Detta är alltså inte okej, men testa gärna själv och se vad som händer:
+
+\begin{matlab}[caption={Man får inte sätta variabelnamnet på fel sida},label={}]
+>> 17 = celsius % ej ok!
+\end{matlab}
+
+Det som ligger på högersidan om tilldelningsoperatorn händer först. Det innebär att vi kan göra beräkningar på högersidan. När det väl har räknats ut, tilldelas variabeln värdet. Vi kan t.ex. plussa ihop en massa siffror och sedan lägga det i variabeln. Här får variabeln \cw{nr} värdet 110:
+
+\begin{matlab}[caption={Beräkningar görs på högersidan om tilldelningsoperatorn},label={}]
+>> nr = 100 + 3 + 7
+\end{matlab}
+
+Med andra ord sker det i följande två steg:
+\begin{enumerate}
+\item Talen 100, 3 och 7 summeras till 110.
+\item Variabeln \cw{nr} skapas och tilldelas värdet 110.
+\end{enumerate}
+
+%------------------------------------------------------------------------------
+
+\section {Rutan ''Workspace'' i Matlab/Octave}
+Dags att prata om en till av rutorna i Matlab/Octave. Om du skrivit in ovanstående kodexempel i ''Command window'' så har du skapat de två variablerna \cw{celsius} och \cw{nr}. Dessa går nu att se i den lilla rutan ''Workspace''.
+
+\figurec{9cm}{gnu-octave-gui-workspace-1.png}{Rutan ''Workspace'' efter att vi skapat två variabler}
+
+Än så länge behöver du bara bry dig om kolumnen ''Name'' och kolumnen ''Value''. Octave visar även några andra kolumner som du inte behöver tänka på än.
+
+Det finns en motsvarande ruta i Octave Online som heter ''Vars''. Där kan man klicka på variablernas namn för att se deras värde.
+
+För att rensa alla variabler som du har skapat kan du skriva kommandot \cw{clear}. Då ser du också att rutan workspace blir tom.
+
+%------------------------------------------------------------------------------
+
+\section{Att läsa en variabels innehåll}
+Efter att en variabel har skapats så kan man läsa innehållet i den och göra beräkningar med den. Man kan till exempel addera två variabler med varandra. Här tilldelar vi variabeln \cw{summa} det sammanlagda värdet av \cw{nr1} och \cw{nr2}, alltså 655 (se kod på nästa sida):
+\newpage
+\begin{matlab}[caption={Addera två variabler},label={}]
+>> nr1 = 100
+nr1 =  100
+>> nr2 = 555
+nr2 =  555
+>> total = nr1 + nr2
+total =  655
+\end{matlab}
+
+Men, kanske du undrar nu, sa vi inte nyss att man inte får sätta variabelnamn på högersidan? Nja, det får man visst, om de variablerna redan finns sedan tidigare och därmed faktiskt har ett värde (100 och 555 i exemplet ovan). Vad vi egentligen menade var att den variabel som vi vill tilldela ett värde måste stå på vänstersidan.
+
+Viktigt att notera är att koden körs uppifrån och ned. Så först skapar vi två variabler (på rad 1 och rad 3). Därefter adderar vi dem (på rad 5). Det hade inte gått att göra tvärtom, att addera två variabler innan de skapats.
+
+Efter att man har skapat och använt variabeln, kan man fortsätta att använda den. Man kan t.ex. ändra variabelns värde. I följande kodstycke ändrar vi en variabel från att ha värdet 100 till att ha värdet 555:
+
+\begin{matlab}[caption={Ändra värdet på en variabel},label={}]
+>> nr = 100
+nr =  100
+>> nr = 555
+nr =  555
+\end{matlab}
+
+\boxteknisk{
+Faktum är att ordet \emph{variabel} kommer från latinets \emph{variare}, vilket betyder ''ändra''. Jämför svenskans variera!
+}
+
+Man kan öka en variabels värde. Det gör man genom att lägga på variabelns (tidigare) värde till sig själv och addera ett nytt värde. Detta kanske är lite förvirrande om du fortfarande tänker på tilldelningsoperatorn som ett lika med-tecken. Men det finns inget som hindrar att vi använder en variabel i en beräkning på högersidan, och skriver samma variabel på vänstersidan. På första raden i följande kodstycke får variabeln \cw{nr} värdet 100, på andra raden får den värdet 150:
+
+\begin{matlab}[caption={Öka värdet på variabeln},label={}]
+>> nr = 100
+nr =  100
+>> nr = nr + 50
+nr =  150
+\end{matlab}
+
+Om detta vore en matematisk ekvation så vore det förstås omöjligt. Det finns ju inget tal som är lika med sig självt plus 50.
+
+%------------------------------------------------------------------------------
+
+\section{Styra utskrifterna}
+
+Hittills har vi låtit datorn automatiskt skriva ut resultaten av alla våra beräkningar. Men vi måste inte ha det så alltid.
+
+\subsection{Semikolon}
+
+Om vi skriver ett semikolon (\cw{;}) på slutet av raden (innan eventuell kommentar) så får vi inte någon utskrift av resultatet:
+
+\begin{matlab}[caption={Hejda utskrift med semikolon},label={}]
+>> nr1 = 100; % skrivs inte ut...
+>> nr2 = 555; % skrivs inte ut...
+>> summa = nr1 + nr2 % men denna skrivs ut!
+summa =  655
+\end{matlab}
+
+Detta kan vara användbart när vi skriver längre program framöver och inte vill bli distraherade av en massa onödiga utskrifter.
+
+\subsection{Skriva ut med disp}\index{disp|textbf}
+
+Ordet \cw{disp} är en förkortning av engelskans \emph{display}. Med \cw{disp} kan vi be datorn skriva ut saker:
+
+\begin{matlab}[caption={Skriv ut på kommando},label={}]
+>> nr1 = 100;
+>> nr2 = 555;
+% vi kan skriva ut text med apostrofer,
+% så kallade enkelfnuttar:
+>> disp('nu ska vi räkna');
+nu ska vi räkna
+>> disp(nr1); % vi kan skriva ut en variabels värde,
+100
+>> disp(nr1+nr2+12); % ...och resultatet av en uträkning
+667
+\end{matlab}
+\newpage
+%---------------------------------------------------------------
+
+\subsection{Övningar för variabler}
+
+\begin{matteovning}{Höger eller vänster?}{assignOpDirection}
+Om du kör dessa tre rader kod:
+\vspace{10pt}
+\begin{matlab}
+a = 1;
+b = 2;
+a = b
+\end{matlab}
+
+Vad är nu värdet på \cw{a} och \cw{b}? Fundera själv innan du testar och läser facit.
+\end{matteovning}
+
+%---------------------------------------------------------------
+\begin{matteovning}{Kopplas variabler ihop för all framtid?}{assignmentNotReference}
+Om du kör dessa tre rader kod:
+\vspace{10pt}
+\begin{matlab}
+a = 1;
+b = a;
+a = 2
+\end{matlab}
+
+Vad är nu värdet på \cw{b}? Fundera själv innan du testar och läser facit.
+\end{matteovning}
+
+%---------------------------------------------------------------
+\begin{matteovning}{Summan och medelvärdet av tre tal}{sum3AndAverage}
+Låt säga att du redan har dessa tre variabler inmatade i Matlab/Octave:
+\vspace{10pt}
+\begin{matlab}
+a = 23;
+b = 45;
+c = 67;
+\end{matlab}
+
+Skriv en rad kod som beräknar summan av dessa variabler och skriver ut summan. Skriv därefter en till rad kod som skriver ut medelvärdet. Kom ihåg att det är datorn som ska göra uträkningen, inte du!
+\end{matteovning}
+%---------------------------------------------------------------
+\begin{matteovning}{Decimaltal till heltal}{roundFloatToInt}
+Låt säga att du redan har denna variabel inmatad i Matlab/Octave:
+\vspace{10pt}
+\begin{matlab}
+a = 11.534;
+\end{matlab}
+
+Skriv en rad kod som tar denna variabel, omvandlar decimaltalet till närmsta heltal, och skriver ut det.
+\end{matteovning}
+
+%------------------------------------------------------------------------------
+

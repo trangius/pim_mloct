@@ -1,0 +1,218 @@
+% Programmering i matematiken - med Matlab & Octave (c) by Krister Trangius & Emil Hall
+%
+% Programmering i matematiken - med Matlab & Octave is licensed under a
+% Creative Commons Attribution-ShareAlike 4.0 International License.
+%
+% You should have received a copy of the license along with this
+% work. If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
+% ----------------------------------------------------------------------------------------
+\chapter{Selektion (med if)}\label{ch:selektion}\index{selektion|textbf}
+Ett program behöver ofta göra olika val beroende på olika värden på saker och ting (t.ex. olika variablers värden). Då använder man något som kallas för \emph{selektion}. I det här kapitlet kommer vi att gå igenom \cw{if}-satsen. Den utför selektion men brukar i sig kallas för \emph{villkorssats}.
+
+Hittills har vi bara skrivit in vår kod i ''Command window'' men nu kommer våra program att växa och då blir det mycket enklare om vi använder filer. Om du inte redan är bekant med det, se \autoref{ch:installation} för hur du ska göra med just ditt program (om du använder Matlab, Octave eller Octave Online).
+
+\section{Läsa in variabler}\index{input|textbf}
+Innan vi går vidare med selektion så ska vi ta ett kort sidospår och lära oss hur man kan läsa in variabler medan en kodsnutt körs. Det är smidigt om man vill köra samma kodsnutt flera gånger, men testa olika värden på variablerna. Hittills när vi har skrivit kod i ''Command window'' har vi ju bara gjort det för oss själva. Men när vi nu börjar arbeta med filer, så har vi ju möjlighet att låta andra personer köra vår kod.
+
+Vi skapar en ny fil och skriver följande kod:
+
+\begin{matlab}[caption={Läsa in variabler},label={}]
+a = input('Ange variabeln a: ');
+b = input('Ange variabeln b: ');
+disp(a+b);
+\end{matlab}
+
+Funktionen \cw{input} skriver alltså ut en text på skärmen, och låter användaren (den som kör vår kod) skriva in något. När användaren tryckt på Enter-tangenten, så fortsätter vår kod köras, och tilldelar det som användaren har skrivit in till variablerna.
+
+\begin{matteovning}{input}{input}
+Testa funktionen \cw{input}. Prova lite olika utskrifter och olika namn på variabler.
+\newline
+\newline
+Testa att köra exemplet ovan, men istället för att skriva in en siffra så skriver du in ditt namn. Vad får du för felmeddelande? Vad tror du det beror på?
+\end{matteovning}
+
+
+\section{if-satsen}\index{if|textbf}
+En \cw{if}-sats jämför alltså två värden med varandra. En \cw{if}-sats på svenska blir alltså en om-sats:
+
+\begin{pseudo}
+OM något SÅ
+	gör detta.
+SLUT OM
+\end{pseudo}
+
+T.ex. så kan man kontrollera hur varmt vatten är:
+
+\begin{pseudo}
+OM temperatur är 100 SÅ
+	skriv ut "Nu kokar vattnet!" på skärmen.
+SLUT OM
+\end{pseudo}
+Detta kan illustreras visuellt som ett flödesschema som ser ut så här:
+
+\figurec{12cm}{flodesschema/if1.png}{If-sats som flödesschema}
+
+\newpage
+Låt oss prova detta i Matlab/Octave. Vi lägger till lite kod för att användaren ska få mata in värdet på variabeln \cw{temperature}:
+
+\begin{matlab}[caption={Vår första if-sats},label={code:kokar1}]
+temperature = input('Ange temperatur: ');
+if temperature == 100
+    disp('Nu kokar vattnet!');
+end
+\end{matlab}
+
+Du minns väl att det är skillnad på jämförelseoperatorn och tilldelningsoperatorn? Om du inte minns, se \autoref{sec:operatorer} och \autoref{sec:tilldelningsoperatorn}. När vi arbetar med \cw{if}-satser använder vi jämförelseoperatorn just för att jämföra två olika tal (eller i exemplet ovan, värdet av variabeln \cw{temperature} och talet \cw{100}).
+
+Lägg märke till att det inte är något semikolon \cw{;} efter \cw{if}-satsen. I kodblocket, alltså det som ligger efter \cw{if temperature == 100} och innan \cw{end}, ligger den kod som vi vill utföra, ifall villkorssatsen visar sig stämma. I exemplet ovan har vi bara en rad kod att utföra i kodblocket.
+
+Om vi anger att vattnet är 100 grader, får vi alltså följande resultat:
+
+\vspace{10pt}
+\begin{matlab}
+Ange temperatur: 100
+Nu kokar vattnet!
+\end{matlab}
+
+\subsection{else}\index{else|textbf}
+Att använda en \cw{if}-sats utan något mer, gör att vi kör ett stycke kod om villkorssatsen visar sig stämma. Annars gör vi ingenting speciellt utan programmet fortsätter bara att köra. Låt oss fortsätta med temperaturer. Om vi i körningen av \autoref{code:kokar1} angav något annat än 100, slutar programmet abrupt:
+
+\vspace{10pt}
+\begin{matlab}
+Ange temperatur: 89
+\end{matlab}
+
+Men ofta vill man ju faktiskt göra något annat, om det visar sig att villkorssatsen \emph{inte} stämmer. Låt oss fortsätta med det kokande vattnet, först på svenska:
+
+\begin{pseudo}
+OM temperatur är 100 SÅ
+   Skriv ut "Nu kokar vattnet!" på skärmen.
+ANNARS
+   Skriv ut "Vattnet är inte exakt 100 grader..."
+SLUT OM
+\end{pseudo}
+\newpage
+Detta kan illustreras som flödesschema så här:
+
+\figurec{12cm}{flodesschema/if2.png}{if och else som flödesschema}
+
+ Låt oss programmera detta i Matlab/Octave:
+
+\begin{matlab}[caption={Vår första else-sats},label={}]
+temperature = input('Ange temperatur: ');
+if temperature == 100
+    disp('Nu kokar vattnet!');
+else
+    disp('Vattnet är inte exakt 100 grader...');
+end
+\end{matlab}
+
+Nu får vi i alla fall ett meddelande, om vi anger att temperaturen är annat än 100 grader:
+
+\vspace{10pt}
+\begin{matlab}
+Ange temperatur: 89
+Vattnet är inte exakt 100 grader...
+\end{matlab}
+
+% \subsection{elseif}\index{elseif|textbf}
+% Ibland vill man göra flera olika jämförelser. Låt oss göra ett test som säger till när temperaturen är exakt halvvägs till 100. Vi skriver det först på svenska:
+
+% \begin{pseudo}
+% OM temperatur är 100 SÅ
+%    Skriv ut "Nu kokar vattnet!" på skärmen.
+% ANNARS OM temperatur är 50 SÅ
+%    Skriv ut "Halvvägs till 100!"
+% ANNARS
+%    Skriv ut "Vattnet är inte exakt 100 grader..."
+% SLUT OM
+% \end{pseudo}
+
+% Observera att vi lägger in \cw{ANNARS OM} mellan den första \cw{OM} och den sista \cw{ANNARS}. Vi hanterar alltså först alla specifika resultat (50 och 100). Sist tar vi hand om alla övriga resultat (alltså alla övriga temperaturer).
+
+% Detta kan illustreras som flödesschema så här:
+
+%  \figurec{12cm}{flodesschema/if3.png}{if, else och elseif som flödesschema}
+
+% Kodat i Matlab/Octave blir det:
+
+% \begin{matlab}[caption={Vår första elseif-sats},label={}]
+% temperature = input('Ange temperatur: ');
+% if temperature == 100
+%     disp('Nu kokar vattnet!');
+% elseif temperature == 50
+%     disp('Halvvägs till 100!');
+% else
+%     disp('Vattnet är inte exakt 100 grader...');
+% end
+% \end{matlab}
+
+% Man kan fylla på med hur många \cw{elseif} man vill för att kontrollera andra temperaturer. Det går också att använda \cw{elseif} utan att använda sig av en \cw{else} på slutet.
+\subsection{if-satser med mindre än-operatorn <}\index{jämförelseoperatorer}
+Låt oss testa \cw{if}-satser med en annan jämförelseoperator. Vi tar mindre än-operatorn \cw{<}.
+
+Vi tar det först på svenska:
+
+\begin{pseudo}
+OM temperatur är mindre än 100 SÅ
+   Skriv ut "Vattnet är inte tillräckligt varmt än..." på skärmen.
+ANNARS
+   Skriv ut "Vattnet kokar!"
+\end{pseudo}
+\newpage
+Kodat i Matlab/Octave blir det:
+
+\begin{matlab}[caption={Mindre än-operatorn},label={}]
+temperature = input('Ange temperatur: ');
+if temperature < 100
+    disp('Vattnet är inte tillräckligt varmt än...');
+else
+    disp('Vattnet kokar!');
+end
+\end{matlab}
+
+På samma sätt som med operatorerna \cw{==} och \cw{<}, kan du använda \cw{if}-satser med de övriga jämförelseoperatorerna som finns listade i \autoref{sec:operatorer}.
+
+
+\subsection{Input med bokstäver}
+
+Ibland känns det lite tråkigt att vi bara kan prata siffror med datorn. Det vore roligare att kunna säga små ord till den, i alla fall ''j'' och ''n'' för att symbolisera ja/nej.
+Vi skapar ett program som ställer frågan ''Är det fint väder?''. Om användaren svarar ''j'' skriver programmet ut ''Vi går på picknick!''. Annars händer ingenting. Men hur ska datorn kunna förstå svaret ''j''? Vi kan använda följande trick:
+
+\begin{matlab}[caption={Kontrollera vädret},label={ml:kontrolleraVadret}]
+j = 1; % det här är tricket
+svaret = input('Är det fint väder? ');
+if svaret == j
+    disp('Vi går på picknick!');
+end
+\end{matlab}
+
+%---------------------------------------------------------------
+
+\section{Övningar}
+
+\begin{matteovning}{Kontrollera vädret (fortsättning)}{kontrolleraVadret2}
+Arbeta vidare på \autoref{ml:kontrolleraVadret} men lägg till att användaren kan svara ''n''. Då skriver programmet ut ''Vi stannar inne och läser en bok''. Är det klurigt? Fundera på värdet på variabeln \cw{n}.
+\end{matteovning}
+
+%---------------------------------------------------------------
+
+\begin{matteovning}{Var är det kallast?}{varArDetKallast}
+Skapa ett program där man får mata in temperaturen i Östersund och Göteborg. Programmet ska sedan berätta var det är kallast. Men om det är lika kallt i båda städerna så ska programmet berätta detta istället.
+\end{matteovning}
+
+%---------------------------------------------------------------
+
+\begin{matteovning}{Felaktig if-sats}{felaktigIfSats}
+Något stämmer inte riktigt med följande if-sats:
+
+\vspace{10pt}
+\begin{matlab}
+x = 9;
+if x = 10
+    disp('den är 10!');
+end
+\end{matlab}
+
+När vi försöker köra koden så får vi ett felmeddelande - vad är det som inte stämmer? Skriv om koden så att det blir rätt!
+\end{matteovning}

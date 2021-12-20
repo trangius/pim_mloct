@@ -1,0 +1,77 @@
+% Programmering i matematiken - med Matlab & Octave (c) by Krister Trangius & Emil Hall
+%
+% Programmering i matematiken - med Matlab & Octave is licensed under a
+% Creative Commons Attribution-ShareAlike 4.0 International License.
+%
+% You should have received a copy of the license along with this
+% work. If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
+% ----------------------------------------------------------------------------------------
+\chapter{Kodblock}\label{ch:kodblock}\index{kodblock|textbf}
+I detta kapitel ska vi prata om något som vi hittills har använt oss av men inte diskuterat, nämligen kodblock. Den kod som ligger mellan t.ex \cw{if} och \cw{end}, eller \cw{while} och \cw{end}, kallas \emph{kodblock}. Ett kodblock kan innehålla flera andra kodblock. Dessa kan man kalla underkodblock osv.
+
+Följande kod är inte körbar, men ett exempel på kodblock:
+
+\begin{csharp}[caption={Kodblock},label={}]
+Kodblock 1
+    Underkodblock 1.1
+        Under-underkodblock 1.1.1
+            Osv...
+        end
+    end
+    Underkodblock 1.2
+        Osv...
+    end
+end
+Kodblock 2
+    Osv...
+end
+\end{csharp}
+
+Till exempel har funktionen \cw{FahrenheitFromCelcius} ett kodblock. Där innanför kan annan kod ligga, låt säga en \cw{while}-sats, som också har ett kodblock:
+
+\begin{csharp}[caption={Kodblock med kommentarer},label={}]
+class Program
+{ // här börjar klassen Program:s kodblock
+
+	static void Main(string[] args)
+	{ // här börjar klassen Main():s kodblock
+
+		Console.Write("Ange temperatur: ");
+		string str = Console.ReadLine();
+		int temperature = Convert.ToInt32(str);
+		while (temperature < 100)
+		{ // Här börjar while-loopens kodblock
+
+			temperature++;
+			Console.WriteLine("Temperaturen är nu " + temperature);
+
+		} // Här slutar while-loopens kodblock
+
+		Console.WriteLine("Vattnet kokar!");
+
+	} // Här slutar metoden Main():s kodblock
+
+} // Här slutar klassen Program:s kodblock
+
+\end{csharp}
+
+Man kan inte lägga kod precis som man vill, var som helst. Enkelt sagt kan man säga:
+\begin{itemize}
+	\item Metoder kan innehålla deklaration av variabler, anrop till andra metoder, jämförelsesatser och loopar. Metoder kan inte innehålla deklaration av andra metoder.
+	\item Jämförelsesatser och loopar kan innehålla variabler, anrop till andra metoder, jämförelsesatser och loopar. De kan inte innehålla deklaration av klasser eller metoder.
+\end{itemize}
+
+Om innebörden av dessa punkter inte är självklara just nu så gör det inget. Vi kommer att lära oss mer om metoder och klasser längre fram och då kommer det att klarna.
+
+\section{Kodblock utan klammerparentes}
+Om man endast har en rad i en loop (t.ex. \cw{while}) eller en jämförelsesats (t.ex. \cw{if}), måste man inte använda sig av klammerparanteser. Följande kod är alltså korrekt:
+
+\begin{csharp}[caption={Kodblock utan klammerparentes},label={}]
+if (temperature < 100)
+    Console.WriteLine("Vattnet är inte tillräckligt varmt än...");
+else
+    Console.WriteLine("Vattnet kokar!");
+\end{csharp}
+
+\section{Variablers livslängd}\label{sec:livslangd}
+En variabel finns endast efter att den har skapats, inte innan. XX skriv mer?

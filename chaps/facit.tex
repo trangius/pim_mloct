@@ -1,0 +1,1155 @@
+% Programmering i matematiken - med Matlab & Octave (c) by Krister Trangius & Emil Hall
+%
+% Programmering i matematiken - med Matlab & Octave is licensed under a
+% Creative Commons Attribution-ShareAlike 4.0 International License.
+%
+% You should have received a copy of the license along with this
+% work. If not, see <http://creativecommons.org/licenses/by-sa/4.0/>.
+% ----------------------------------------------------------------------------------------
+\chapter{Facit och lösningsförslag}\label{ch:facit}
+Här följer facit till denna bok. I många av övningarna i denna bok ska du skriva kod. Den kod som presenteras här ska ses som lösningsförslag, snarare än ett absolut facit. Med programmering går det ju att lösa ett problem på många olika sätt.
+%------------------------------------------------------------------------------
+
+\section*{\facchapref{ch:datorn_som_raknemaskin}}
+
+Övningarna i kapitlet behöver inget facit.
+
+%------------------------------------------------------------------------------
+
+\section*{\facchapref{ch:variabler}}
+
+\subsection*{\facovref{ov:assignOpDirection}}
+Efter att ha kört de tre kodraderna så är \cw{a=2} och \cw{b=2}. Alltså, när det står två variabler på varsin sida om tilldelningsoperatorn så ändras den på vänstra sidan.
+
+\subsection*{\facovref{ov:assignmentNotReference}}
+På rad 2 så får \cw{b} det dåvarande värdet av \cw{a}, alltså blir \cw{b=1}. Efter att ha kört de tre kodraderna så är \cw{b=1} fortfarande. Det är \emph{inte} så att \cw{b} ''kopplas ihop'' med \cw{a} för all framtid. När vi på rad 3 ändrar värdet på \cw{a} så ändras alltså \emph{inte} värdet på \cw{b}.
+
+\subsection*{\facovref{ov:sum3AndAverage}}
+\vspace{3pt}
+\begin{matlab}
+a = 23;
+b = 45;
+c = 67;
+disp(a + b + c);
+disp((a + b + c) / 3);
+\end{matlab}
+
+\subsection*{\facovref{ov:roundFloatToInt}}
+\vspace{3pt}
+\begin{matlab}
+a = 11.534;
+disp(round(a));
+\end{matlab}
+
+\section*{\facchapref{ch:listor}}
+
+\subsection*{\facovref{ov:skapaListaMed6Element}}
+\vspace{3pt}
+\begin{matlab}
+% omständigt sätt 1:
+a = [];
+a(1) = 20;
+a(2) = 30;
+a(3) = 40;
+a(4) = 50;
+a(5) = 60;
+a(6) = 70;
+a(7) = 80;
+a(8) = 90;
+
+% omständigt sätt 2:
+a = [];
+a(end + 1) = 20;
+a(end + 1) = a(end) + 10;
+a(end + 1) = a(end) + 10;
+a(end + 1) = a(end) + 10;
+a(end + 1) = a(end) + 10;
+a(end + 1) = a(end) + 10;
+a(end + 1) = a(end) + 10;
+a(end + 1) = a(end) + 10;
+
+% kortare sätt:
+a = [20 30 40 50 60 70 80 90];
+
+% ännu bättre sätt:
+a = [20 : 10 : 90];
+\end{matlab}
+
+\subsection*{\facovref{ov:dispMedLista}}
+Vi får följande utskrift:
+\vspace{10pt}
+\begin{matlab}
+0
+6
+\end{matlab}
+
+
+% \subsection*{\facovref{ov:listansLangd}}
+% XX
+% \subsection*{\facovref{ov:operatorerPaVarjeElement}}
+% XX
+%------------------------------------------------------------------------------
+
+\section*{\facchapref{ch:grafer}}
+
+\subsection*{\facovref{ov:aterskapaKodEfterBild}}
+\vspace{3pt}
+\begin{matlab}
+hold on;
+plot([-3 3], [4 5], '-o');
+plot([-3 : 3], [6 7 5 6 5 4 3], '-o');
+\end{matlab}
+
+\subsection*{\facovref{ov:plottaGivenFunktion}}
+\vspace{3pt}
+\begin{matlab}
+x = [-20 : 0.1 : 20];
+y = sin(x) ./ x;
+plot(x, y);
+\end{matlab}
+Notera att om vi bara använder \cw{x = [-20 : 20]} så blir grafen fult kantig. Därför tar vi kortare steg med steglängden \cw{0.1}.
+
+%------------------------------------------------------------------------------
+
+\section*{\facchapref{ch:selektion}}
+
+\subsection*{\facovref{ov:input}}
+Jag testar att skriva in mitt namn som variabeln \cw{b}:
+\vspace{10pt}
+\begin{matlab}
+Ange variabeln a: 12
+Ange variabeln b: Emil
+error: 'Emil' undefined near line 1 column 1
+\end{matlab}
+Matlab/Octave säger att det inte existerar någon variabel som heter \cw{Emil}. Du kan prova att först skapa en variabel och sen skriva in dess namn så kommer det att funka.
+\newpage
+\subsection*{\facovref{ov:kontrolleraVadret2}}
+\vspace{3pt}
+\begin{matlab}
+j = 1;
+n = 0;
+svaret = input('Är det fint väder? ');
+if svaret == j
+    disp('Vi går på picknick!');
+end
+if svaret == n
+    disp('Vi stannar inne och läser en bok');
+end
+\end{matlab}
+
+\subsection*{\facovref{ov:varArDetKallast}}
+\vspace{3pt}
+\begin{matlab}
+ostersund_temp = input('Ange temperaturen i Östersund: ');
+goteborg_temp = input('Ange temperaturen i Göteborg: ');
+if ostersund_temp < goteborg_temp
+    disp('Det är kallast i Östersund');
+end
+if goteborg_temp < ostersund_temp
+    disp('Det är kallast i Göteborg');
+end
+if goteborg_temp == ostersund_temp
+    disp('Det är lika kallt');
+end
+\end{matlab}
+
+\subsection*{\facovref{ov:felaktigIfSats}}
+Felet är att vi har råkat använda tilldelningsoperatorn \cw{=} istället för jämförelseoperatorn \cw{==}. Vi ville förstås egentligen skriva såhär:
+\vspace{10pt}
+\begin{matlab}
+x = 9;
+if x == 10
+    disp('den är 10!');
+end
+\end{matlab}
+
+
+%------------------------------------------------------------------------------
+
+\section*{\facchapref{ch:iteration}}
+
+\subsection*{\facovref{ov:talMellan1Och20}}
+\vspace{3pt}
+\begin{matlab}
+tal = 1;
+while tal <= 20
+	disp(tal);
+	tal = tal + 1;
+end
+\end{matlab}
+
+\subsection*{\facovref{ov:talMellan1Och100}}
+\vspace{3pt}
+\begin{matlab}
+tal = input('Ange tal: ');
+while tal <= 100
+	disp(tal);
+	tal = tal + 1;
+end
+\end{matlab}
+
+\subsection*{\facovref{ov:singlaSlant}}
+\vspace{3pt}
+\begin{matlab}
+antal_singlingar = input('Ange hur många gånger du vill singla slant: ');
+i = 1;
+while i <= antal_singlingar
+	if randi(2) == 1
+		disp('Krona');
+	else
+		disp('Klave');
+	end
+	i = i + 1;
+end
+\end{matlab}
+
+\subsection*{\facovref{ov:slumpaFemTarningssslag}}
+\vspace{3pt}
+\begin{matlab}
+i = 1;
+while i <= 5
+	disp(randi(6));
+	i = i + 1;
+end
+\end{matlab}
+\newpage
+\subsection*{\facovref{ov:vaderstationen}}
+\vspace{3pt}
+\begin{matlab}
+num_temperatures = input('Ange antal mätningar: ');
+% skapa tom lista som kommer fyllas på med temperaturer:
+all_temperatures = [];
+i = 1; % räknare för antal iterationer
+total = 0; % används för att räkna ut medelvärdet
+while i <= num_temperatures
+	temperature = input('Ange temperaturmätning: ');
+	% lägg till mätningen i slutet av listan:
+	all_temperatures(end + 1) = temperature;
+	total = total + temperature;
+	i = i + 1;
+end
+disp(all_temperatures);
+% räkna ut medelvärdet:
+average = total / num_temperatures;
+disp(average);
+\end{matlab}
+
+\subsection*{\facovref{ov:multiplikationstabellen}}
+\vspace{3pt}
+\begin{matlab}
+i = 1; % det ena som ska gångras med...
+while i <= 10
+	j = 1; % ... det andra
+	while j <= 10
+		disp(i * j);
+		j = j + 1;
+	end
+	i = i + 1;
+	disp('---'); % separator
+end
+\end{matlab}
+%------------------------------------------------------------------------------
+
+\section*{\facchapref{ch:problemlosning}}
+\subsection*{\facovref{ov:gissatalet}}
+\vspace{3pt}
+\begin{matlab}
+answer = randi(100); % slumpa ett tal mellan 1 och 100
+
+nr_guesses = 1;
+guess = input('Gissa ett tal mellan 1 och 100: ');
+while guess ~= answer
+    if guess < answer
+        guess = input('Fel! Mitt tal är högre. Gissa igen: ');
+    end
+    if guess > answer
+        guess = input('Fel! Mitt tal är lägre. Gissa igen: ');
+    end
+    nr_guesses = nr_guesses + 1;
+end
+disp('Rätt! Såhär många gissningar behövde du:');
+disp(nr_guesses);
+\end{matlab}
+
+\subsection*{\facovref{ov:datorngissartalet}}
+\vspace{3pt}
+\begin{matlab}
+r = 1; % rätt
+l = 2; % lägre
+h = 3; % högre
+user_input = 0; % ska hantera r, l eller h
+min = 1;
+max = 100;
+
+nr_guesses=0;
+
+disp('===============================================');
+
+while user_input ~= r
+	% vi avrundar nedåt för att bara jobba med heltal:
+    guess = floor((max+min)/2);
+    disp('Jag gissar på:');
+    disp(guess);
+    user_input = input('Är det [r]ätt? Eller är ditt tal [h]ögre eller [l]ägre? ');
+    if user_input == h
+        min = guess;
+    end
+    if user_input == l
+        max = guess;
+    end
+	nr_guesses = nr_guesses + 1;
+end
+
+disp('Såhär många gissningar behövde jag:');
+disp(nr_guesses);
+\end{matlab}
+
+%------------------------------------------------------------------------------
+
+\section*{\facchapref{ch:ovningar}}
+
+\subsection*{\facovref{ov:kontrolleraFaktorer}}
+\vspace{3pt}
+\begin{matlab}
+all_factors = [3 5 7 17 23]; % här kan Kim ändra
+expected_product = 41055; % här också
+product = 1;
+i = 1;
+while i <= size(all_factors, 2)
+	product = product * all_factors(i);
+	i = i + 1;
+end
+if product == expected_product
+	disp('Rätt');
+else
+	disp('Fel');
+end
+\end{matlab}
+
+\subsection*{\facovref{ov:delbartMedTre}}
+\vspace{3pt}
+\begin{matlab}
+the_number = input('Skriv ett heltal: ');
+% blir det ingen rest om vi dividerar talet med 3?
+if mod(the_number, 3) == 0
+	disp('delbart');
+else
+	disp('ej delbart');
+end
+\end{matlab}
+
+\subsection*{\facovref{ov:primtalEllerEj}}
+\vspace{3pt}
+\begin{matlab}
+the_number = input('Skriv ett heltal: ');
+is_prime = 1;
+factor = 2;
+while factor <= sqrt(the_number)
+	% blir det ingen rest om vi dividerar?
+	% dvs, är den jämt delbar?
+	% dvs, är "factor" en faktor i "the_number"?
+	if mod(the_number, factor) == 0
+		is_prime = 0;
+	end
+	factor += 1;
+end
+if is_prime
+	disp('primtal');
+else
+	disp('ej primtal');
+end
+\end{matlab}
+
+\subsection*{\facovref{ov:faktoriseraTillPrimtalsFaktorer}}
+\vspace{3pt}
+\begin{matlab}
+remaining = input('Skriv ett heltal: ');
+factor = 2;
+while remaining > 1
+	% blir det ingen rest om vi dividerar?
+	% dvs, är den jämt delbar?
+	% dvs, är "factor" en faktor i "remaining"?
+	if mod(remaining, factor) == 0
+		% vi har hittat en faktor, skriv ut den
+		disp(factor);
+		% efter denna faktor, vad blir kvar av talet?
+		remaining = remaining / factor;
+	else
+		factor = factor + 1;
+	end
+end
+\end{matlab}
+
+\subsection*{\facovref{ov:testaFaktoriseringsProgrammet}}
+\vspace{3pt}
+\begin{matlab}
+the_number = input('Skriv ett heltal: ');
+% faktorisera:
+remaining = the_number;
+factor = 2;
+all_factors = [];
+while remaining > 1
+	if mod(remaining, factor) == 0
+		disp(factor);
+		all_factors(end + 1) = factor;
+		remaining = remaining / factor;
+	else
+		factor = factor + 1;
+	end
+end
+% kontrollräkna:
+product = 1;
+i = 1;
+while i <= size(all_factors, 2)
+	product = product * all_factors(i);
+	i = i + 1;
+end
+if product == the_number
+	disp('Rätt');
+else
+	disp('Fel');
+end
+
+\end{matlab}
+
+
+\subsection*{\facovref{ov:funktionenRandi}}
+Övningen behöver inget facit.
+
+\subsection*{\facovref{ov:datornLangsam}}
+Övningen behöver inget facit.
+
+\subsection*{\facovref{ov:twoDiceSumHistShapeChange}}
+När vi bara gör 100 kast så blir histogrammet ofta ganska ojämnt och ''taggigt''. Men ju fler kast, desto mer antar histogrammet formen av en likbent triangel.
+\subsection*{\facovref{ov:twoDiceDiffProgram}}
+\vspace{3pt}
+\begin{matlab}
+random_numbers = [];
+number_throws = 100; % den här kan man ändra
+throw = 1;
+while throw <= number_throws;
+	dice1 = randi(6);
+	dice2 = randi(6);
+	difference = abs(dice1 - dice2);
+	random_numbers(end + 1) = difference;
+	throw = throw + 1;
+end
+hist(random_numbers, min(random_numbers):max(random_numbers));
+\end{matlab}
+
+\subsection*{\facovref{ov:twoDiceDiff}}
+Den vanligaste skillnaden mellan två tärningar är 1.
+
+\subsection*{\facovref{ov:myOwnHistogramFunction}}
+\vspace{3pt}
+\begin{matlab}
+% ... detta är fortsättning på koden i övningen ovan
+% med andra ord funkar denna kod inte för sig själv
+low = min(random_numbers);
+high = max(random_numbers);
+num_points_in_histogram = 1 + high - low;
+summary = zeros(1, num_points_in_histogram);
+i = 1;
+while i <= size(random_numbers, 2)
+	one_number = random_numbers(i);
+	index_in_summary = one_number + 1 - low;
+	summary(index_in_summary) = summary(index_in_summary) + 1;
+	i = i + 1;
+end
+xaxis = [low : high];
+plot(xaxis, summary, '-o');
+% gör att y-axeln alltid börjar på 0,
+% men välj automatiskt var den slutar:
+ylim([0 inf]);
+\end{matlab}
+\boxlinks{
+	Läs mer om \cw{ylim} här: \url{http://se.mathworks.com/help/matlab/creating_plots/change-axis-limits-of-graph.html}
+}
+
+\subsection*{\facovref{ov:yatzy1}}
+Rätt svar är ca 0,077\% men det krävs väldigt många spelomgångar för att få ett bra närmevärde.
+\vspace{10pt}
+\begin{matlab}
+total_nr_yatzy = 0; % hur många gånger vi fått yatzy
+nr_games = 100000; % hur många spel vi vill köra
+game = 1;
+while game <= nr_games
+
+  % slå en tärning:
+  first = randi(6);
+  % slå fyra tärningar till, se om alla blir samma:
+  all_are_same = 1;
+  die = 2; % för vi har redan slagit tärning 1
+  while die <=5
+    if randi(6) ~= first
+      all_are_same = 0;
+    end
+    die = die + 1; % gå vidare till nästa tärning
+  end
+
+  if all_are_same == 1 % blev det yatzy?
+    total_nr_yatzy = total_nr_yatzy + 1;
+  end
+  game = game + 1; % för att gå vidare till nästa spel
+end
+
+% skriv ut vårt närmevärde till sannolikheten för yatzy,
+% i procent:
+disp(100 * total_nr_yatzy / nr_games);
+\end{matlab}
+
+\subsection*{\facovref{ov:yatzy2}}
+% iterera fem tärningar
+% die = 1;
+% while die <=5
+%   dices(die) = randi(6);
+%   die = die + 1; % gå vidare till nästa tärning
+% end
+
+% disp('Tärningssslag:');
+% disp(dices);
+
+% räkna ut vilket tärningsvärde som vi slog flest av.
+% det är de tärningarna som vi vill spara nästa slag.
+
+\vspace{3pt}
+\begin{matlab}
+dices = [1 4 5 4 3]; % lista med våra fem tärningar
+
+save_eyes = 0; % vilket tärningsvärde vi slog flest av
+nr_save = 0; % antal tärningar med det värdet
+
+% iterera sex gånger, en för varje tänkbart tärningsvärde
+eyes = 1;
+while eyes <= 6
+
+  % räkna hur många tärningar som visar just detta värde
+  counter = 0;
+  die = 1;
+  while die <= 5
+    if dices(die) == eyes
+        counter = counter + 1;
+    end
+    die = die + 1;
+  end
+
+  % ska vi byta vilket tärningsvärde vi ska spara?
+  if nr_save < counter
+    nr_save = counter;
+    save_eyes = eyes;
+  end
+
+  eyes = eyes + 1;
+end
+disp('Bäst att spara alla tärningar med antal ögon:');
+disp(save_eyes);
+\end{matlab}
+
+Alternativ lösning:
+\vspace{10pt}
+\begin{matlab}
+dices = [1 4 5 4 3]; % lista med våra fem tärningar
+dice_histogram = zeros(1, 6);
+die = 1;
+while die <= 5
+	eyes = dices(die);
+	dice_histogram(eyes) = dice_histogram(eyes) + 1;
+	die = die + 1;
+end
+% dice_histogram(1) är hur många 1:or vi slog
+% dice_histogram(2) är hur många 2:or vi slog, osv
+nr_save = 0;
+eyes = 1;
+while eyes <= 6
+	if nr_save < dice_histogram(eyes)
+		nr_save = dice_histogram(eyes);
+		save_eyes = eyes;
+	end
+	eyes = eyes + 1;
+end
+disp(save_eyes);
+\end{matlab}
+(Se nästa sida för ytterligare en alternativ lösning)
+\newpage
+Alternativ lösning för den som vill lära sig mer om hur man kan använda \cw{hist}, \cw{max} och \cw{find}:
+\vspace{10pt}
+\begin{matlab}
+dices = [1 4 5 4 3]; % lista med våra fem tärningar
+dice_histogram = hist(dices, 1:6);
+save_eyes = find(dice_histogram == max(dice_histogram), 1);
+disp(save_eyes);
+\end{matlab}
+
+Ännu kortare lösning:
+\vspace{10pt}
+\begin{matlab}
+dices = [1 4 5 4 3]; % lista med våra fem tärningar
+save_eyes = mode(dices);
+disp(save_eyes);
+\end{matlab}
+
+\boxlinks{
+	För mer information om \cw{mode}, se: \url{https://se.mathworks.com/help/matlab/ref/mode.html}:
+}
+
+\subsection*{\facovref{ov:chansTillYatzy}}
+Ungefär 4.6\% chans.
+\vspace{10pt}
+\begin{matlab}
+dices = [0 0 0 0 0]; % lista med våra fem tärningar
+total_nr_yatzy = 0; % hur många gånger vi fått yatzy
+
+nr_games = 10000; % hur många spel vi vill köra
+game = 1;
+while game <= nr_games
+  % save_eyes håller reda på vilket tärningsvärde vi har
+  % flest av. Här sätter vi den till -1 för vi ska behöva
+  % slå om alla tärningar första gången i ett nytt spel:
+  save_eyes = -1;
+
+  % roll är en räknare som går från 1 till 3.
+  % vi itererar alltså tre gånger, en gång för varje slag:
+  roll = 1;
+  while roll <= 3
+
+    % iterera fem tärningar, slå om några eller alla:
+    die = 1;
+    while die <= 5
+      % om vi inte vill spara tärningen, slå om den:
+      if dices(die) ~= save_eyes
+        dices(die) = randi(6);
+      end
+      die = die + 1; % gå vidare till nästa tärning
+    end
+
+    % räkna ut vilket tärningsvärde som vi slog flest av.
+    % det är de tärningarna som vi vill spara nästa slag.
+
+    save_eyes = 0; % vilket tärningsvärde vi slog flest av
+    nr_save = 0; % antal tärningar med det värdet
+
+    % iterera 6 gånger, ett varv för varje
+    % tänkbart tärningsvärde
+    eyes = 1;
+    while eyes <= 6
+
+      % räkna hur många tärningar som visar just detta
+      % värde
+      counter = 0;
+      die = 1;
+      while die <= 5
+        if dices(die) == eyes
+          counter = counter + 1;
+        end
+        die = die + 1;
+      end
+
+      % ska vi byta vilket tärningsvärde vi ska spara?
+      if counter > nr_save
+        nr_save = counter;
+        save_eyes = eyes;
+      end
+
+      eyes = eyes + 1;
+    end
+
+    roll = roll + 1; % för att gå vidare till nästa slag
+  end
+  if nr_save == 5 % blev det yatzy?
+    total_nr_yatzy = total_nr_yatzy + 1;
+  end
+  game = game + 1; % för att gå vidare till nästa spel
+end
+
+% skriv ut vårt närmevärde till sannolikheten för yatzy,
+% i procent
+disp(100 * total_nr_yatzy / nr_games);
+\end{matlab}
+
+\newpage
+\subsection*{\facovref{ov:standardavvikelse}}
+Medelvärde: 6.1500, standardavvikelse: 3.8010
+\vspace{10pt}
+\begin{matlab}
+my_list = [4 9 10 7.5 8 9 3 9 4 -2];
+nr_items = size(my_list, 2);
+
+% räkna ut summan för alla tal i listan:
+total = 0;
+i = 1;
+while i <= nr_items
+    total = total + my_list(i);
+    i = i + 1;
+end
+
+% räkna ut medelvärdet:
+mid = total / nr_items;
+
+% räkna ut standardavvikelse:
+total = 0; % återställ total till 0
+i = 1;
+while i <= nr_items
+    total = total + (my_list(i) - mid)^2;
+    i = i + 1;
+end
+
+std_dev = sqrt(total/ (nr_items-1));
+% nr_items-1 pga Bessels korrektion
+
+disp(mid);
+disp(std_dev);
+\end{matlab}
+
+\subsection*{\facovref{ov:typvarde}}
+Typvärde: 9
+\vspace{10pt}
+\begin{matlab}
+my_list = [4 9 10 7.5 8 9 3 9 4 -2];
+nr_items = size(my_list, 2);
+
+nr_most_common = 0; % antal element med typvärdet
+
+i = 1;
+while i <= nr_items
+
+	% räkna antal element med "det här" värdet:
+	counter = 0;
+	j = 1;
+	while j <= nr_items
+		if my_list(j) == my_list(i)
+			counter = counter + 1;
+		end
+		j = j + 1;
+	end
+
+	% ska vi ersätta det förra typvärdet?
+	if nr_most_common < counter
+		nr_most_common = counter;
+		most_common = my_list(i);
+	end
+
+	i = i + 1;
+end
+disp('Typvärde: ');
+disp(most_common);
+\end{matlab}
+
+
+\subsection*{\facovref{ov:standardavvikelse2}}
+\vspace{3pt}
+\begin{matlab}
+my_list = [4 9 10 7.5 8 9 3 9 4 -2];
+disp(mean(my_list)); % medelvärde
+disp(mode(my_list)); % typvärde
+disp(std(my_list)); % standardavvikelse
+\end{matlab}
+
+%==============================================================================
+
+\subsection*{\facovref{ov:enkelNumeriskLosning}}
+\vspace{3pt}
+\begin{matlab}
+x = -10;
+while x <= 10
+	if 3 * x - 7 == 5
+		disp(x);
+	end
+	x = x + 1;
+end
+\end{matlab}
+
+\subsection*{\facovref{ov:enkelNumeriskLosningFel1}}
+Vi ändrar på rad 3 i föregående kodstycke till \cw{if 3 .* x .- 7 == 29}. Programmet misslyckas för att lösningen då är 12, vilket ligger utanför intervallet -10 till 10 som ju är de värden vi testar. Den lättaste fixen är att testa ett större intervall, till exempel -1000 till 1000.
+
+\subsection*{\facovref{ov:enkelNumeriskLosningFel2}}
+Vi ändrar på rad 3 i föregående kodstycke till \cw{if 3 .* x .- 7 == 4}. Lösningen på $3x-7=4$ är x=3,6666... men programmet kan bara hitta heltalslösningar. När datorn testar \cw{x=3} så blir vänsterledet lika med 2, och när datorn i nästa varv testar \cw{x=4} så blir vänsterledet lika med 5. Vänsterledet ''hoppar'' alltså direkt från 2 till 5, och hoppar över rätt svar. Det finns inget jättelätt sätt att fixa programmet - vi behöver byta till en mer avancerad metod.
+
+\subsection*{\facovref{ov:testaSolve}}
+$x = -6$
+\vspace{10pt}
+\begin{matlab}
+syms x;
+solve(4*x+15==-9, x)
+\end{matlab}
+
+\subsection*{\facovref{ov:intervallhalvering}}\index{intervallhalvering|textbf}\index{binär sökning|textbf}
+Precis som i ''gissa talet''-spelet så är det smart att gissa mitt emellan två tal. Sedan testar vi vår gissning \cw{xmed} genom att mata in den i ekvationen, och kolla om vi hamnade \emph{under} eller \emph{över} $4$. Den grundläggande strategin brukar kallas \emph{binär sökning} eller \emph{intervallhalvering}, och används som lösning på en mängd olika problem inom programmering.
+\vspace{10pt}
+\begin{matlab}
+xmin = -10; % dessa måste sättas manuellt,
+xmax = 10; % så att de "omfamnar" svaret
+i = 1;
+while i <= 20 % ju fler iterationer desto mer exakt svar
+	xmed = (xmin + xmax) / 2; % gissa mitt emellan
+	% testa ekvationens (snarare olikhetens) värde
+	% i tre punkter:
+	ymin = 3 * xmin - 7 < 4;
+	ymax = 3 * xmax - 7 < 4;
+	ymed = 3 * xmed - 7 < 4;
+	% kontrollera att vi är på vardera sidan om rätt svar:
+	if ymin == ymax
+		disp('fel! välj bättre xmin och xmax. Starta om');
+	    i = 10000; % avbryt loopen i förtid
+	end
+	% välj vilken halva vi ska söka vidare i:
+	if ymin ~= ymed
+		xmax = xmed;
+	end
+	if ymax ~= ymed
+		xmin = xmed;
+	end
+	i = i + 1;
+end
+disp(xmin);
+disp(xmax);
+\end{matlab}
+Det här programmet är för övrigt ett bra exempel på när det skulle löna sig att skapa våra egna funktioner i Matlab/Octave. Med en egen funktion skulle vi kunna slippa upprepa nästan samma ekvations-kod tre gånger. Om du har lust och tid över, sök information om det på nätet, t.ex. på \url{https://se.mathworks.com/help/matlab/ref/function.html}
+
+
+\subsection*{\facovref{ov:testaSolve2ndDegree}}
+$x_{1}=-6$, $x_{2}=1$
+\vspace{10pt}
+\begin{matlab}
+syms x;
+solve(x*x + 5*x - 6 == 0, x)
+\end{matlab}
+
+\subsection*{\facovref{ov:testaRoots2ndDegree}}
+\begin{itemize}
+\item \cw{roots([6 -13 5])} ger $x_{1}=1.66667$ och $x_{2}=0.5$
+\item \cw{roots([4 -2 -6])} ger $x_{1}=1.5$ och $x_{2}=-1$
+\item $2/x - 18 = 0$ är inte en polynomekvation, går inte att lösa med \cw{roots}
+\item \cw{roots([3 -2 0])} ger $x_{1}=0.66667$ och $x_{2}=0$
+\end{itemize}
+\newpage
+\subsection*{\facovref{ov:intervallhalvering2}}
+Samma program som i \autoref{ov:intervallhalvering}, förutom att vi ändrar startvärdena \cw{xmin} och \cw{xmax}, samt ändrar ekvationen (olikheten). Programmet hittar lösningen $x = 14.667$
+\vspace{10pt}
+\begin{matlab}
+xmin = -50;
+xmax = 50;
+i = 1;
+while i <= 20
+	xmed = (xmin + xmax) / 2;
+	ymin = xmin^6 - sin(xmin) - 3^xmin + 7 < 0;
+	ymax = xmax^6 - sin(xmax) - 3^xmax + 7 < 0;
+	ymed = xmed^6 - sin(xmed) - 3^xmed + 7 < 0;
+	if ymin == ymax
+		disp('fel! välj bättre xmin och xmax. Starta om');
+	    i = 10000; % avbryt loopen i förtid
+	end
+	if ymin ~= ymed
+		xmax = xmed;
+	end
+	if ymax ~= ymed
+		xmin = xmed;
+	end
+	i = i + 1;
+end
+disp(xmin);
+disp(xmax);
+\end{matlab}
+
+\subsection*{\facovref{ov:intervallhalvering3}}
+Nej, lösningsförslaget i den här boken klarar inte att lösa den ekvationen. Intervallhalverings-metoden bygger ju på att \cw{ymin} och \cw{ymax} ska vara på varsin sida rätt svar, så metoden kräver alltså att kurvan korsar linjen $y=0$. Men polynomfunktionen $y = x^2 + 5x - 6$ bara nuddar vid linjen utan att korsa den! Det finns dock andra numeriska metoder som klarar att lösa sådana ekvationer.
+%==============================================================================
+
+
+
+\subsection*{\facovref{ov:lisasLillaTunna}}
+Radie=1 dm, höjd=2 dm
+\vspace{10pt}
+\begin{matlab}
+radius = [0.5 : 0.1 : 1.5];
+volume = 6.2832;
+height = volume ./ (pi .* (radius.^2));
+area = 2 .* pi .* radius .* (radius .+ height);
+plot(radius, area, '-o');
+\end{matlab}
+\figurec{9cm}{exercise-lisas-lilla-tunna-area.png}{Grafen för ovanstående kod}
+
+%==============================================================================
+
+% \subsection*{\facovref{ov:arsrantaOchManadsranta}}
+% \begin{matlab}
+% yearly = 3 / 100; % omvandla från procent
+% monthly = (1 + yearly)^(1/12) - 1;
+% disp(monthly * 100); % skriv ut i procent
+% yearly = (1 + monthly)^12 - 1;
+% disp(yearly * 100); % skriv ut i procent
+% \end{matlab}
+
+\subsection*{\facovref{ov:invanareEfterYYears}}
+6727.5 biljetter (troligen avrundat uppåt eller nedåt).
+\vspace{10pt}
+\begin{matlab}
+tickets = [1000]; % ett element per år
+yr = 1;
+while yr <= 20
+	tickets(yr+1) = tickets(yr) * (1 + 10/100);
+	yr = yr + 1;
+end
+disp(tickets(end));
+plot(tickets, '-o');
+\end{matlab}
+
+\subsection*{\facovref{ov:invanareHurMangaYears}}
+Den 18:e festivalen.
+\vspace{10pt}
+\begin{matlab}
+tickets = [1000]; % ett element per år
+yr = 1;
+while tickets(end) < 5000
+	tickets(yr+1) = tickets(yr) * (1 + 10/100);
+	yr = yr + 1;
+end
+disp(yr);
+\end{matlab}
+
+\newpage
+\subsection*{\facovref{ov:oregelbundenExpFunkt}}
+Den 26:e festivalen har 8110.5 biljetter (troligen avrundat uppåt eller nedåt).
+\vspace{10pt}
+\begin{matlab}
+nr_years = 25
+changes = [];
+% changes innehåller ökningen i procent från föregående festival
+% sätt de två första ökningarna:
+changes(2) = 4;
+changes(3) = 2;
+% räkna ut alla andra ökningar enligt mönstret:
+yr = 3;
+while yr <= nr_years
+	changes(yr+1) = changes(yr-1) + 1;
+	yr = yr + 1;
+end
+
+tickets = [1000]; % ett element per år
+yr = 1;
+while yr <= nr_years
+	change = (1 + changes(yr+1) / 100); 
+	tickets(yr+1) = tickets(yr) * change;
+	yr = yr + 1;
+end
+disp(tickets(end));
+plot(tickets, '-o');
+\end{matlab}
+
+
+% \subsection*{\facovref{ov:invanareVilkenPercentOkning}}
+% XX
+% \begin{matlab}
+% min_percent = 0;
+% max_percent = 100;
+% start_tickets = 1024;
+% end_tickets = 3125;
+% total_years = 5;
+% tickets = -1;
+% while round(tickets) ~= end_tickets
+% 	guess_percent = (min_percent + max_percent) / 2; % gissa mitt emellan
+
+%   tickets = start_tickets;
+%   years_passed = 0;
+%   while years_passed < total_years
+%     tickets = tickets * (1 + guess_percent/100);
+%     years_passed = years_passed + 1;
+%   end
+%   %disp(tickets);
+%   disp([tickets, min_percent, guess_percent, max_percent]);
+
+% 	% välj vilken halva vi ska söka vidare i:
+% 	if tickets > end_tickets
+% 		max_percent = guess_percent;
+% 	end
+%   if tickets < end_tickets
+% 		min_percent = guess_percent;
+% 	end
+% end
+% disp(guess_percent);
+
+% disp(((end_tickets / start_tickets) ^ (1 / total_years)) - 1);
+% \end{matlab}
+% 25%
+% 1024.0   1280.0   1600.0   2000.0   2500.0   3125.0
+
+\subsection*{\facovref{ov:oregelbundenExpFunkt2}}
+Ungefär 1300 kaniner.
+\vspace{10pt}
+\begin{matlab}
+hold on;
+estimates = [];
+
+i = 1;
+while i <= 100
+	rabbits = [20]; % ett element per månad
+	mon = 1;
+	while mon <= 24
+		change = 1 + randi([10 28]) / 100;
+		rabbits(mon+1) = rabbits(mon) * change;
+		mon = mon + 1;
+	end
+
+	plot(rabbits);
+	estimates(end + 1) = rabbits(end);
+	i = i + 1;
+end
+
+% skriv ut medelvärde
+disp('Ca antal kaniner: ');
+disp(mean(estimates));
+\end{matlab}
+
+\figurec{9cm}{exercise-rabbits.png}{}
+
+\subsection*{\facovref{ov:avbetalningAvAnnuitetsLan}}
+\vspace{3pt}
+\begin{matlab}
+% konstanter:
+interest = 5; % månadsränta i procent
+amort_per_month = 1087.07;
+
+% listor:
+months = [0];
+sum_payed = [0];
+months_twice = [0];
+debt = [15000];
+
+while debt(end) > 0
+  month = months(end) + 1;
+
+  months(end+1) = month;
+  sum_payed(end+1) = sum_payed(end) + amort_per_month;
+
+  months_twice(end+1) = month;
+  debt(end+1) = debt(end) * (1 + interest / 100);
+  months_twice(end+1) = month;
+  debt(end+1) = debt(end) - amort_per_month;
+end
+
+hold on;
+plot(months, sum_payed, '-o');
+plot(months_twice, debt);
+\end{matlab}
+
+%==============================================================================
+
+\subsection*{\facovref{ov:numeriskDeriveringTabell1}}
+
+Med hjälp av följande kod:
+\vspace{10pt}
+\begin{matlab}
+x = [2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017];
+y = [383.79 385.60 387.43 389.90 391.65 393.85 396.52 398.65 400.83 404.21 406.53];
+
+index = 10; % det 10e mätvärdet i listan
+result = (y(index+1) - y(index-1)) / 2;
+disp(result);
+\end{matlab}
+
+Får vi resultatet \emph{2.8500} ppm/år.
+
+\subsection*{\facovref{ov:numeriskDeriveringTabell2}}
+\vspace{3pt}
+\begin{matlab}
+x = [2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017];
+y = [383.79 385.60 387.43 389.90 391.65 393.85 396.52 398.65 400.83 404.21 406.53];
+
+year = input('ange år mellan 2008 och 2016: ');
+
+% hitta index för årtalet användaren vill se:
+index = find(x == year);
+
+% räkna ut den centrala differenskvoten kring det året
+result = (y(index+1) - y(index-1)) / 2;
+disp(result);
+\end{matlab}
+
+
+\subsection*{\facovref{ov:numeriskDeriveringFunktion}}
+Ett närmevärde till derivatan är: -0.19048
+\vspace{10pt}
+\begin{matlab}
+x = input('ange x-värde att beräkna derivatan för: ');
+h = 0.4;
+x_left  = x - h;
+x_right = x + h;
+y_left  = (x_left^2 + 1) / x_left;
+y_right = (x_right^2 + 1) / x_right;
+estimate = (y_right - y_left) / (2 * h);
+disp('ett närmevärde till derivatan är: ');
+disp(estimate);
+\end{matlab}
+
+
+\subsection*{\facovref{ov:numeriskDeriveringOlikaH}}
+Följande kod:
+\vspace{10pt}
+\begin{matlab}
+estimates = [];
+x = input('ange x-värde att beräkna derivatan för: ');
+h = 0.4;
+num_halvings = 1;
+while num_halvings <= 8
+	x_left  = x - h;
+	x_right = x + h;
+	y_left  = (x_left^2 + 1) / x_left;
+	y_right = (x_right^2 + 1) / x_right;
+	estimate = (y_right - y_left) / (2 * h);
+	estimates(end + 1) = estimate;
+	h = h / 2;
+	num_halvings = num_halvings + 1;
+end
+plot(estimates, '-o');
+\end{matlab}
+
+Ger grafen:
+\figurec{9cm}{exercise-estimate-derivative.png}{}
+
+I grafen ser det ut som att den exakta derivatan är: 0
+\newpage
+\subsection*{\facovref{ov:testaGradient}}
+Den symbolhanterande metoden ger svaret i form av ett bråk: $f'(1) = -5/2$,
+medan följande numeriska kod ger approximationen $f'(1) = -2.5$
+\vspace{10pt}
+\begin{matlab}
+xp = 1; % i vilken punkt vill vi veta lutningen
+h = 0.001;
+x = [xp - h : h : xp + h];
+y = 3 * sqrt(x) + 2 ./ x.^2; % vår funktion
+estimate = gradient(y, h)(2);
+disp(estimate);
+\end{matlab}
+
+\subsection*{\facovref{ov:approximeraTaletE}}
+Följande kod ger approximationen $e = 2.7183$
+\vspace{10pt}
+\begin{matlab}
+emin = 0; % dessa måste sättas manuellt,
+emax = 10; % så att de "omfamnar" svaret.
+
+% för ändringskvot. mindre h ger exaktare svar:
+h = 0.00001; 
+i = 1;
+while i <= 40 % ju fler iterationer desto exaktare svar
+	emed = (emin + emax) / 2; % gissa mitt emellan
+	% beräkna ändringskvoten kring emed^1:
+	slope = (emed^(1+h) - emed^(1-h)) / (2 * h);
+	% vi önskar att 'slope' ska bli exakt lika med emed,
+	% så välj vilken halva vi ska söka vidare i:
+	if slope > emed
+		% vår gissning var för hög, sök i nedre halvan
+		emax = emed;
+	else
+		% vår gissning var för låg, sök i övre halvan
+		emin = emed;
+	end
+	i = i + 1;
+end
+if abs(slope - emed) < 0.001
+	disp('Talet e är ungefär = ');
+	disp(emed);
+else
+	disp('Hittade inte något tal e mellan emin och emax.');
+	disp('Ändra startvärden och försök igen.');
+end
+\end{matlab}
