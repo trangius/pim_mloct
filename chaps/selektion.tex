@@ -115,39 +115,6 @@ Ange temperatur: 89
 Vattnet är inte exakt 100 grader...
 \end{matlab}
 
-% \subsection{elseif}\index{elseif|textbf}
-% Ibland vill man göra flera olika jämförelser. Låt oss göra ett test som säger till när temperaturen är exakt halvvägs till 100. Vi skriver det först på svenska:
-
-% \begin{pseudo}
-% OM temperatur är 100 SÅ
-%    Skriv ut "Nu kokar vattnet!" på skärmen.
-% ANNARS OM temperatur är 50 SÅ
-%    Skriv ut "Halvvägs till 100!"
-% ANNARS
-%    Skriv ut "Vattnet är inte exakt 100 grader..."
-% SLUT OM
-% \end{pseudo}
-
-% Observera att vi lägger in \cw{ANNARS OM} mellan den första \cw{OM} och den sista \cw{ANNARS}. Vi hanterar alltså först alla specifika resultat (50 och 100). Sist tar vi hand om alla övriga resultat (alltså alla övriga temperaturer).
-
-% Detta kan illustreras som flödesschema så här:
-
-%  \figurec{12cm}{flodesschema/if3.png}{if, else och elseif som flödesschema}
-
-% Kodat i Matlab/Octave blir det:
-
-% \begin{matlab}[caption={Vår första elseif-sats},label={}]
-% temperature = input('Ange temperatur: ');
-% if temperature == 100
-%     disp('Nu kokar vattnet!');
-% elseif temperature == 50
-%     disp('Halvvägs till 100!');
-% else
-%     disp('Vattnet är inte exakt 100 grader...');
-% end
-% \end{matlab}
-
-% Man kan fylla på med hur många \cw{elseif} man vill för att kontrollera andra temperaturer. Det går också att använda \cw{elseif} utan att använda sig av en \cw{else} på slutet.
 \subsection{if-satser med mindre än-operatorn <}\index{jämförelseoperatorer}
 Låt oss testa \cw{if}-satser med en annan jämförelseoperator. Vi tar mindre än-operatorn \cw{<}.
 

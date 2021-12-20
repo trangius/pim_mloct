@@ -258,12 +258,6 @@ Prova att ändra ekvationen till $3x-7=4$. Ditt program kommer inte att hitta l�
 \begin{matteovning}{Lös linjär ekvation med \cw{solve} (Ma1c)}{testaSolve}
 Det är förstås möjligt att skriva ett bättre program som inte har svagheterna i de två ovanstående övningarna. Men det finns redan en färdig, inbyggd funktion som inte har dessa två svagheter. Funktionen heter \cw{solve} och finns i Matlab och i Octave Online, men inte i det nedladdade\&installerade Octave (i skrivande stund). Den används såhär:
 
-% XX Finns på https://octave.sourceforge.io/symbolic/ men är krångligt att installera
-% kolla upp andra funktioner:
-% https://se.mathworks.com/help/symbolic/vpasolve.html
-% http://octave.sourceforge.net/octave/function/fzero.html
-% https://www.gnu.org/software/octave/doc/interpreter/Solvers.html#XREFfsolve
-% http://octave.sourceforge.net/octave/function/linsolve.html
 \vspace{10pt}
 \begin{matlab}
 syms x;
@@ -295,15 +289,6 @@ Tricket är att, istället för att bara leta efter \emph{ett} x där vänsterle
 
 %==============================================================================
 
-
-
-%==============================================================================
-
-% \section{Nåt mer med linjära ekvationssystem}
-
-
-%==============================================================================
-
 \section{Andragradsekvationer}\label{sec:andragradsekvationer}
 
 \emph{Följande övningar är lämpliga för Ma2c och Ma3c och är relaterade till följande centrala innehåll:
@@ -313,10 +298,6 @@ Tricket är att, istället för att bara leta efter \emph{ett} x där vänsterle
 \item \textbf{Samband och förändring}: Egenskaper hos andragradsfunktioner. (Ma2c)
 \item \textbf{Samband och förändring}: Algebraiska och grafiska metoder för lösning av extremvärdesproblem (Ma3c)
 \end{itemize}}
-
-% \begin{matteovning}{xx}{}
-% Hitta en andragradsfunktions symmetriaxel / lägsta/högsta värde.
-% \end{matteovning}
 
 \begin{matteovning}{Lös andragradsekvation med \cw{solve} (Ma2c)}{testaSolve2ndDegree}
 Använd \cw{solve} (som vi lärde oss i \autoref{ov:testaSolve}) för att hitta de två rötterna till andragradsekvationen $x^2 + 5x - 6 = 0$. Vilka är rötterna?
@@ -400,8 +381,6 @@ $area = 2 * \pi * radie * (radie + h)$
 Problemet går att lösa analytiskt, men vi ska lösa det genom att titta i en graf. Skapa en lista med ett antal tänkbara radier, till exempel från 0 till 10. Använd sedan ovanstående ekvationer för att beräkna en lista med höjder, och en lista med areor. Använd slutligen funktionen \cw{plot()} för att grafiskt se vilken radie som ger den minsta arean. Du kan behöva ändra på din lista med radie-förslag flera gånger för att ''zooma in'' på rätt del av grafen.
 \end{matteovningm}
 
-% XX  Skriv ett program som hittar alla maximi- och minimipunkter i en lista?
-
 %==============================================================================
 
 \newpage
@@ -417,7 +396,7 @@ Problemet går att lösa analytiskt, men vi ska lösa det genom att titta i en g
 
 % \begin{matteovning}{Årsränta och månadsränta (Ma2c)}{arsrantaOchManadsranta}
 % % behandlar följande centrala innehåll: Begreppen förändringsfaktor och index samt metoder för beräkning av räntor och amorteringar för olika typer av lån. egenskaper hos exponentialfunktioner. Algebraiska och grafiska metoder för att lösa exponential-ekvationer.
-% % Lämplig för Ma1c??? , Ma2c XX dubbelkolla!
+% % Lämplig för Ma1c??? , Ma2c?
 % Den första januari sätter Gizem in 10000 kr på ett sparkonto som ska ge 3\% ränta på ett år. Hon förväntar sig att få 300 kr insatta på kontot av banken den 31 december. Men det visar sig istället att den här banken sätter in pengar varje månad istället för en gång per år. Insättningarna blir större och större varje månad på grund av ränta-på-ränta-effekten. Vid årets slut har hon totalt fått exakt 300 kr, som förväntat. Hon räknar ut att månadsräntan blev ungefär 0.2466\%.
 % \newline
 % \newline
