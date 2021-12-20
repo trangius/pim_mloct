@@ -4,7 +4,7 @@ Programmering i matematiken - med Matlab och Octave
 En lärobok för gymansiekurserna Ma1c, Ma2c och Ma3c, av Krister Trangius och Emil Hall. Utgiven på Thelin Läromedel. Stödj oss gärna genom att köpa boken via https://www.skolportalen.se.
 
 # PDF-nerladdning
-Senaste versionen av boken är tillgänglig i pdf-format här: https://gitlab.com/mahakala777/pim_mloct/pim_mloct.pdf.
+Senaste versionen av boken är tillgänglig i pdf-format i git-repot.
 
 # Kompilera boken
 Denna bok är skriven i LaTeX. För att redigera boken rekommenderas att du installerar någon av de kompletta TeX distributioner som finns. Se https://repl.it/languages/python3. För att kompilera kan du förslagsvis avända `mklatex`, såhär gör du en pdf-fil:
