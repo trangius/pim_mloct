@@ -44,10 +44,6 @@
 %\renewcommand{\cellalign}{tl} % and this one to align them...
 
 \usepackage{parskip} % space between paragraphs instead of indent
-% \topskip=10pt
-% \parskip=2pt % space between paragraphs
-% \parindent=12pt
-% \baselineskip=0pt
 
 \usepackage{imakeidx}
 \makeindex[intoc=false]
@@ -170,22 +166,6 @@
 \usepackage{hyperref}
 \hypersetup{hidelinks,colorlinks=false,breaklinks=true,urlcolor=myBlue,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
 
-
-% \usepackage{bookmark}
-% \bookmarksetup{
-% open,
-% numbered,
-% addtohook={%
-% \ifnum\bookmarkget{level}=0 % chapter
-% \bookmarksetup{bold}%
-% \fi
-% \ifnum\bookmarkget{level}=-1 % part
-% \bookmarksetup{color=myBlue,bold}%
-% \fi
-% }
-% }
-
-
 %----------------------------------------------------------------------------------------
 %  HEADINGS
 %----------------------------------------------------------------------------------------
@@ -251,39 +231,8 @@
 \let\origpart\part
 \renewcommand\part[2]{\edef\partbackground{#2}\origpart{#1}}
 
-% \titleformat{\part}
-%   {\normalfont\huge\filleft}
-%   {}
-%   {20pt}
-%   {\begin{tikzpicture}[remember picture,overlay]
-%   \node[inner sep=0pt] (background) at (current page.center) {\includegraphics[width=\paperwidth]{cover}}; % bg-image
-%   \node[ % top block
-%       fill=myBlue,
-% 	  opacity=0.8,
-%       text width=2\paperwidth,
-%       rounded corners=0cm,
-%       text depth=18cm,
-%       anchor=center,
-%       inner sep=0pt] at (current page.north east) (parttop)
-%     {\thepart};% this is the I, II and III etc
-%   \node[
-%       anchor=south east,
-%       inner sep=0pt,
-%       outer sep=0pt] (partnum) at ([yshift=60pt, xshift=-20pt]parttop.south)
-%     {\partnumfont\thepart};
-%   \node[ % so this should be the name then...
-%       anchor=south east,
-% 	  color=white,
-%       inner sep=0pt,
-% 	  outer sep=0pt] at ([yshift=30pt, xshift=-20pt]parttop.south)
-%   {\parbox{1.7\textwidth}{\raggedleft\partnamefont#1}}; %the 1.7 is the max widht the text can have, dunno how it works but it works now...
-%   \end{tikzpicture}%
-%   }
-
-
-      %align=right,
 %----------------------------------------------------------------------------------------
-%	LISTINGS for: C#, MatLab, console
+%	LISTINGS for: c#, cpp, matlab, python, console, pseudokod
 %   SEE: https://en.m.wikibooks.org/wiki/LaTeX/Source_Code_Listings
 %        http://texdoc.net/texmf-dist/doc/latex/listings/listings.pdf
 %----------------------------------------------------------------------------------------
