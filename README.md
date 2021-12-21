@@ -7,7 +7,7 @@ En lärobok för gymansiekurserna Ma1c, Ma2c och Ma3c, av Krister Trangius och E
 Senaste versionen av boken är tillgänglig i pdf-format i git-repot på https://gitlab.com/mahakala777/pim_mloct.
 
 # Kompilera boken
-Denna bok är skriven i LaTeX. För att redigera boken rekommenderas att du installerar någon av de kompletta TeX distributioner som finns. Se https://www.latex-project.org. För att kompilera kan du förslagsvis avända `mklatex`, såhär gör du en pdf-fil:
+Denna bok är skriven i LaTeX. För att kompilera boken rekommenderas att du installerar någon av de kompletta TeX distributioner som finns. Se https://www.latex-project.org. Använd förslagsvis `mklatex` för att t.ex. skapa en pdf-fil:
 
 ```sh
 latexmk -pdf pim_mloct.tex
